@@ -1,0 +1,25 @@
+> Régime populaire et libertaire
+
+2 présidents : saphiriq + sanslognien
+présidents élus par élections régionales (une élection saphiriq, une élection sanslognienne, en fonction de comment la région gère leurs élections)
+
+pour proposer une loi :
+ les deux présidents se réunissent et en discutent
+ l'assemblée propose une loi
+
+pour approuver une loi :
+ l'assemblée envoit la loi au conseil des citoyens
+ le conseil des citoyens propose des conseils (* préciser comment ça fonctionne pcq l'assemblée pourrait ignorer tous leurs conseils)
+ si le conseil a voté oui :
+  l'assemblée doit approuver la loi à majorité de 2/3
+  si l'assemblé a approuvé la loi :
+   la loi est ajouté au code
+  sinon:
+ sinon:
+  la loi est rejetée
+
+pour élir l'assemblée :
+ élection représentative par population (50% des votes populaires = 50% des sièges) en utilisant le vote alternatif [https://youtu.be/3Y3jE3B8HsE]
+
+pour élir le conseil des citoyens :
+ élection représentative par population en utilisant le vote alternatif [https://youtu.be/3Y3jE3B8HsE]
