@@ -1,0 +1,7 @@
+This program requires 5 individual entries (1 ROM cartridges)
+
+0
+0
+0
+2
+1
