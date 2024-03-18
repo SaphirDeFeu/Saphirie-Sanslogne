@@ -1,5 +1,4 @@
 nop
 nop
-nop
-jmp
+mov 1 eax
 ret

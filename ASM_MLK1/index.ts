@@ -13,7 +13,15 @@ for (const line of lines) {
 
   if (values.length > 0) {
     values.forEach((e) => {
-      result.push(parseInt(e));
+      const integer = parseInt(e);
+      if (!Number.isNaN(integer)) {
+        result.push(integer);
+      } else {
+        if (instruction == "mov") {
+          const regNumber = getRegNum(e);
+          result.push(regNumber);
+        }
+      }
     });
   }
 }
@@ -26,6 +34,23 @@ function parseInstruction(instruction: string): number {
       return 1;
     case "jmp":
       return 2;
+    case "mov":
+      return 3;
+    default:
+      return -1;
+  }
+}
+
+function getRegNum(register: string): number {
+  switch (register) {
+    case "eax":
+      return 0;
+    case "ebx":
+      return 1;
+    case "ecx":
+      return 2;
+    case "edx":
+      return 3;
     default:
       return -1;
   }
