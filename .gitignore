@@ -1,3 +1,5 @@
+*.exe
+
 cpu-mlk-1-compiler/
 cpu-mlk-1-docs/
 logs/
@@ -13,5 +15,7 @@ cpu-mlk-1-ops.ods
 
 sftp-access/
 
-timeCalc/target/
+target/
+.vscode/
+
 resourcepack/uncompressed
