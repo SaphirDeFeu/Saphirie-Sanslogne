@@ -15,9 +15,9 @@ if (Test-Path "resourcepack.zip") {
   }
 }
 
-$compress_options = @{
-  Path = "./uncompressed/assets", "./uncompressed/pack.mcmeta", "./uncompressed/pack.png"
-  DestinationPath = "./resourcepack.zip"
-}
-Compress-Archive @compress_options
+Set-Location "uncompressed"
+7z a -tzip resourcepack.zip assets pack.mcmeta pack.png
+Copy-Item resourcepack.zip ../resourcepack.zip
+Remove-Item -Force resourcepack.zip
+Set-Location ..
 Get-FileHash -Path "resourcepack.zip" -Algorithm SHA1 | Format-List
