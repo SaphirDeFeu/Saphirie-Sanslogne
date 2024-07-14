@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "pack_format": 22,
+    "description": "§lMinigameLolCow Official Resources"
+  },
+  "language": {
+    "sa_sa": {
+      "name": "Safŏrganaf",
+      "region": "Safŏrganav",
+      "bidirectional": false
+    }
+  }
+}

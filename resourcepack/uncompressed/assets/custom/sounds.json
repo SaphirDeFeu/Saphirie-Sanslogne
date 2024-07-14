@@ -1,0 +1,16 @@
+{
+  "generalerelese": {
+    "sounds": ["custom:generaleReleases"]
+  },
+  "item.taser.hit": {
+    "sounds": ["custom:item/taser/hit1", "custom:item/taser/hit2"],
+    "subtitle": "item.taser.hit"
+  },
+  "entity.dealer.talk": {
+  "sounds": ["custom:entity/dealer/talk1", "custom:entity/dealer/talk2"]
+  },
+  "music.forestcave.battle": {
+    "sounds": ["custom:music/forestcave/battle"]
+  }
+
+}
