@@ -1,0 +1,7 @@
+addons:
+  economy:
+    enabled: true
+  calculator:
+    enabled: true
+  nbt:
+    enabled: false # Experimental feature, enable at your own risk

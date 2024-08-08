@@ -1,0 +1,80 @@
+name: minigamelolcow
+version: '1.0.0-1.21'
+main: io.github.saphirdefeu.minigamelolcow.Main
+api-version: '1.21'
+prefix: "MLC-PL"
+load: STARTUP
+author: SaphirDeFeu
+description: Main plugin of MinigameLolCow
+commands:
+  economymanager:
+    description: Main economy management command
+    usage: /economymanager <add|remove|set|get|create|delete|list> [<args>]
+    permission: mlc.economy.admin
+    permission-message: "You do not have permission to run this command"
+    aliases: [economy, econ]
+  adminpay:
+    description: Makes any account pay any other account any amount
+    usage: /adminpay <account> <account> <amount>
+    permission: mlc.economy.admin
+    permission-message: "You do not have permission to run this command"
+    aliases: [apay]
+  pay:
+    description: Pay any account any positive amount from your personal account
+    usage: /pay <account> <amount>
+    permission: mlc.economy.pay
+    permission-message: "You do not have permission to run this command"
+  withdraw:
+    description: Withdraws any amount from an account
+    usage: /withdraw <amount> [account - with permission]
+    permission: mlc.economy.withdraw
+    permission-message: "You do not have permission to run this command"
+  deposit:
+    description: Deposits a held money note into an account
+    usage: /deposit [account - with permission]
+    permission: mlc.economy.withdraw
+    permission-message: "You do not have permission to run this command"
+  balance:
+    description: Shows the balance of an account
+    usage: /balance [account]
+    permission: mlc.economy.balance
+    permission-message: "You do not have permission to run this command"
+    aliases: [bal]
+  calculate:
+    description: Calculates time and date using the Timesave scoreboards
+    usage: /calculate <time|date>
+    permission: mlc.calculator.calculate
+    permission-message: "You do not have permission to run this command"
+    aliases: [calc]
+
+permissions:
+  mlc.admin:
+    description: "Administrator permission for minigamelolcow"
+    default: op
+    children:
+      mlc.economy.admin: true
+      mlc.calculator.admin: true
+  mlc.economy.admin:
+    description: "Administrator permission for the economy addon of minigamelolcow"
+    default: op
+    children:
+      mlc.economy.pay: true
+      mlc.economy.withdraw: true
+      mlc.economy.balance: true
+  mlc.economy.pay:
+    description: "Allows the use of /pay"
+    default: not op
+  mlc.economy.withdraw:
+    description: "Allows the use of /withdraw and /deposit"
+    default: not op
+  mlc.economy.balance:
+    description: "Allows the use of /balance"
+    default: not op
+  mlc.calculator.admin:
+    description: "Administrator permission for the calculator addon of minigamelolcow"
+    default: op
+    children:
+      mlc.calculator.calculate: true
+  mlc.calculator.calculate:
+    description: "Allows the use of /calculate"
+    default: not op
