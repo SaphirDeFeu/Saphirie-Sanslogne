@@ -24,8 +24,8 @@ private/
 LoreForgeData/loreforge-metadata.json
 
 # gitignore developement
-development/**/.gradle
-development/**/.idea
-development/**/build
-development/**/gradle
-development/**/run
+development/*/.gradle
+development/*/.idea
+development/*/build
+development/*/gradle
+development/*/run
