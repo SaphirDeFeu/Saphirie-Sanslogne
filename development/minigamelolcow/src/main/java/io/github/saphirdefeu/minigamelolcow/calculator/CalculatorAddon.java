@@ -23,11 +23,18 @@ public class CalculatorAddon {
         registerCommands(plugin);
     }
 
+    /**
+     * Enregistre les commandes de l'add-on Calculator
+     * @param plugin L'instance du plugin actuel
+     */
     private void registerCommands(JavaPlugin plugin) {
         LifecycleEventManager<Plugin> manager = plugin.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();
+
+            // ! Commandes
             commands.register(Calculate.name, Calculate.description, Calculate.aliases, new Calculate());
+            // !
         });
     }
 }

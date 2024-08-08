@@ -165,6 +165,12 @@ public class EconomyManager implements BasicCommand {
         return accountUsernames;
     }
 
+    /**
+     * Spéficies la balance d'un compte à une nouvelle
+     * @param stack Le stack utilisé pour envoyer un message de finalisation. Utilisation de 'null' déconseillée
+     * @param username Le nom du compte
+     * @param balance La nouvelle balance
+     */
     public static void setBalance(CommandSourceStack stack, @NotNull String username, @NotNull double balance) {
         if(!EconomyAddon.accountExists(username)) {
             stack.getSender().sendRichMessage(String.format("<red>Account '%s' does not exist</red>", username));
@@ -178,14 +184,26 @@ public class EconomyManager implements BasicCommand {
         } catch(NullPointerException e) {}
     }
 
-    public static double getBalance(CommandSourceStack stack, @NotNull String username) throws IllegalArgumentException {
+    /**
+     * Récupères la balance d'un compte
+     * @param stack Le stack utilisé pour des messages d'erreur. Utilisation de 'null' déconseillée.
+     * @param username Le nom du compte
+     * @return La balance du compte
+     */
+    public static double getBalance(CommandSourceStack stack, @NotNull String username) {
         if(!EconomyAddon.accountExists(username)) {
-            throw new IllegalArgumentException(String.format("Account '%s' does not exist", username));
+            stack.getSender().sendRichMessage(String.format("<red>Account '%s' does not exist</red>", username));
+            return 0.0;
         }
 
         return Database.getAccountBalance(username);
     }
 
+    /**
+     * Renvois un message d'aide pour une commande au stack
+     * @param stack Le stack
+     * @param cmd Une commande de l'add-on
+     */
     public void displayCommandHelp(@NotNull CommandSourceStack stack, @NotNull String cmd) {
         String helpMessage = String.format("<rainbow>MINIGAMELOLCOW ECONOMY MANAGER</rainbow> - <gold>SaphirDeFeu</gold><br>");
         switch(cmd) {
@@ -227,6 +245,10 @@ public class EconomyManager implements BasicCommand {
         stack.getSender().sendRichMessage(helpMessage);
     }
 
+    /**
+     * Envois un message d'aide au stack
+     * @param stack Le stack
+     */
     public void displayHelp(@NotNull CommandSourceStack stack) {
         String helpMessage = "<rainbow>MINIGAMELOLCOW ECONOMY MANAGER</rainbow> - by <gold>SaphirDeFeu</gold><br>" +
         "<gold>Aliases:</gold> /economy, /econ<br>" +

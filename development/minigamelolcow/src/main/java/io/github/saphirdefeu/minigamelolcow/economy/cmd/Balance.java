@@ -27,8 +27,8 @@ public class Balance implements BasicCommand {
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
         String accountHolder = stack.getSender().getName();
-        if(args.length >= 1) {
-            accountHolder = args[0];
+        if(args.length >= 1) { // Check si il y a au moins 1 argument
+            accountHolder = args[0]; // Si oui, le compte en question sera l'argument 1
         }
 
         if(!EconomyAddon.accountExists(accountHolder)) {
@@ -38,7 +38,7 @@ public class Balance implements BasicCommand {
 
         double balance = EconomyManager.getBalance(null, accountHolder);
         String str = String.format("<rainbow>[MLC-PL]</rainbow> <yellow>%s</yellow>'s balance: ", accountHolder);
-        if(balance < 0.0) {
+        if(balance < 0.0) { // Mets en rouge les balances négatives
             str += String.format("<red>%.2f$</red>", balance);
         } else {
             str += String.format("<yellow>%.2f$</yellow>", balance);

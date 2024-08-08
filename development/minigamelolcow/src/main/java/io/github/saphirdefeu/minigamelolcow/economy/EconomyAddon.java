@@ -11,19 +11,28 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.saphirdefeu.minigamelolcow.economy.cmd.*;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
-public class EconomyAddon {
+/**
+ * Add-on ECONOMY du plugin, classe principale qui gère l'entièreté de la section économique
+ */
+public final class EconomyAddon {
     public static final String RESOURCE_LOCATION = "mlc:econ";
 
     public static ConsoleCommandSender consoleSender;
 
-    public EconomyAddon(JavaPlugin plugin) {
+    /**
+     * Setup de l'add-on
+     * @param plugin L'instance du plugin actuel
+     * @throws SQLException si on ne peut se connecter à la base de données
+     */
+    public EconomyAddon(JavaPlugin plugin) throws SQLException {
         consoleSender = Bukkit.getServer().getConsoleSender();
 
         int databaseReturnValue = Database.connect();
         if(databaseReturnValue == 1) {
-            throw new RuntimeException("cannot connect to database");
+            throw new SQLException("cannot connect to database");
         } else {
             Logger.debug(RESOURCE_LOCATION + " - Economy addon initialized");
         }
@@ -31,10 +40,16 @@ public class EconomyAddon {
         registerCommands(plugin);
     }
 
+    /**
+     * Enregistre les commandes de l'add-on
+     * @param plugin L'instance du plugin actuel
+     */
     private void registerCommands(JavaPlugin plugin) {
         LifecycleEventManager<Plugin> manager = plugin.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();
+
+            // ! Commandes
             commands.register(EconomyManager.name, EconomyManager.description, EconomyManager.aliases, new EconomyManager());
             commands.register(AdminPay.name, AdminPay.description, AdminPay.aliases, new AdminPay());
             commands.register(Pay.name, Pay.description, Pay.aliases, new Pay());
@@ -42,15 +57,18 @@ public class EconomyAddon {
             commands.register(Balance.name, Balance.description, Balance.aliases, new Balance());
             commands.register(Deposit.name, Deposit.description, Deposit.aliases, new Deposit());
             commands.register(Salary.name, Salary.description, Salary.aliases, new Salary());
+            // !
         });
     }
 
+    /**
+     * Vérifie si un compte existe
+     * @param username Le nom du compte
+     * @return true - Il existe | false - n'existe pas
+     */
     public static boolean accountExists(String username) {
         HashMap<String, Double> accounts = Database.getAccounts();
-        if(accounts.containsKey(username)) {
-            return true;
-        }
-        return false;
+        return accounts.containsKey(username);
     }
 
 }

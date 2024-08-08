@@ -3,7 +3,6 @@ package io.github.saphirdefeu.minigamelolcow.economy.cmd;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -22,6 +21,6 @@ public class Salary implements BasicCommand {
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
-
+        // Absolument rien ici, je m'en occupe après------------
     }
 }
