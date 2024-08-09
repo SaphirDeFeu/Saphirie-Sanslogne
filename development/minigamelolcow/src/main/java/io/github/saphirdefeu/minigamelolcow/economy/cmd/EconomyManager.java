@@ -141,18 +141,21 @@ public class EconomyManager implements BasicCommand {
                     if(cmds.contains(args[1])) displayCommandHelp(stack, args[1]);
                     else displayHelp(stack);
                 }
-
-                return;
             }
         }
     }
 
     @Override
     public Collection<String> suggest(@NotNull CommandSourceStack stack, @NotNull String[] args) {
+        Collection<String> firstParams = List.of("help", "add", "remove", "set", "get", "create", "delete", "list");
         switch(args.length) {
             case 0: {
-                return List.of("help", "add", "remove", "set", "get", "create", "delete", "list");
+                return firstParams;
             }
+        }
+
+        if(!firstParams.contains(args[0])) {
+            return firstParams;
         }
 
         HashMap<String, Double> accounts = Database.getAccounts();
@@ -205,7 +208,7 @@ public class EconomyManager implements BasicCommand {
      * @param cmd Une commande de l'add-on
      */
     public void displayCommandHelp(@NotNull CommandSourceStack stack, @NotNull String cmd) {
-        String helpMessage = String.format("<rainbow>MINIGAMELOLCOW ECONOMY MANAGER</rainbow> - <gold>SaphirDeFeu</gold><br>");
+        String helpMessage = String.format("<rainbow>MINIGAMELOLCOW ECONOMY MANAGER</rainbow> - by <gold>SaphirDeFeu</gold><br>");
         switch(cmd) {
             case "adminpay": {
                 helpMessage += "<gold>Usage:</gold> <yellow>/adminpay <account1> <account2> <amount></yellow><br>" +

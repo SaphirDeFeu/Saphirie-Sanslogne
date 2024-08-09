@@ -212,7 +212,7 @@ public abstract class Database {
      * @param username Le nom du compte
      * @param salary Le nouveau salaire
      */
-    public static void updateSalary(String username, double salary) {
+    public static void setAccountSalary(String username, double salary) {
         String sql = "UPDATE ACCOUNTS SET salary = ? WHERE username = ?;";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setDouble(1, salary); // Le premier "?" du texte est remplacé par salary

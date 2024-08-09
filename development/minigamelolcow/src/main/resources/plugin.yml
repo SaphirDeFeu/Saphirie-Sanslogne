@@ -12,13 +12,11 @@ commands:
     usage: /economymanager <add|remove|set|get|create|delete|list> [<args>]
     permission: mlc.economy.admin
     permission-message: "You do not have permission to run this command"
-    aliases: [economy, econ]
   adminpay:
     description: Makes any account pay any other account any amount
     usage: /adminpay <account> <account> <amount>
     permission: mlc.economy.admin
     permission-message: "You do not have permission to run this command"
-    aliases: [apay]
   pay:
     description: Pay any account any positive amount from your personal account
     usage: /pay <account> <amount>
@@ -39,13 +37,16 @@ commands:
     usage: /balance [account]
     permission: mlc.economy.balance
     permission-message: "You do not have permission to run this command"
-    aliases: [bal]
+  salary:
+    description: Interface to interact with the salaries of accounts
+    usage: /salary <set|get|all> [<args>]
+    permission: mlc.economy.admin
+    permission-message: "You do not have permission to run this command"
   calculate:
     description: Calculates time and date using the Timesave scoreboards
     usage: /calculate <time|date>
     permission: mlc.calculator.calculate
     permission-message: "You do not have permission to run this command"
-    aliases: [calc]
 
 permissions:
   mlc.admin:
