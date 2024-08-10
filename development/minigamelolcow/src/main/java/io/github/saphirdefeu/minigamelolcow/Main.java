@@ -3,6 +3,7 @@ package io.github.saphirdefeu.minigamelolcow;
 import io.github.saphirdefeu.minigamelolcow.calculator.CalculatorAddon;
 import io.github.saphirdefeu.minigamelolcow.economy.Database;
 import io.github.saphirdefeu.minigamelolcow.economy.EconomyAddon;
+import io.github.saphirdefeu.minigamelolcow.listeners.Listeners;
 import io.github.saphirdefeu.minigamelolcow.nbtedit.NBTAddon;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -46,6 +47,11 @@ public final class Main extends JavaPlugin {
             Logger.debug("Initializing NBT addon");
             Logger.warn("NBT ADDON IS EXPERIMENTAL - THINGS MAY BREAK");
             nbtAddon = new NBTAddon(this);
+        }
+
+        if(config.getBoolean("addons.listeners.enabled")) {
+            Logger.debug("Registering global events");
+            Listeners.register(this);
         }
 
         Logger.debug("MLC enabled");
