@@ -20,16 +20,12 @@ import java.util.HashMap;
 public final class EconomyAddon {
     public static final String RESOURCE_LOCATION = "mlc:econ";
 
-    public static ConsoleCommandSender consoleSender;
-
     /**
      * Setup de l'add-on
      * @param plugin L'instance du plugin actuel
      * @throws SQLException si on ne peut se connecter à la base de données
      */
     public EconomyAddon(JavaPlugin plugin) throws SQLException {
-        consoleSender = Bukkit.getServer().getConsoleSender();
-
         int databaseReturnValue = Database.connect();
         if(databaseReturnValue == 1) {
             throw new SQLException("cannot connect to database");

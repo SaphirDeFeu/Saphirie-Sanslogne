@@ -47,6 +47,11 @@ commands:
     usage: /calculate <time|date>
     permission: mlc.calculator.calculate
     permission-message: "You do not have permission to run this command"
+  phone:
+    description: Summons a Pineapple phone into your inventory
+    usage: /phone [identifier]
+    permission: mlc.phones.phone
+    permission-message: "You do not have permission to run this command"
 
 permissions:
   mlc.admin:
@@ -55,6 +60,7 @@ permissions:
     children:
       mlc.economy.admin: true
       mlc.calculator.admin: true
+      mlc.phones.phone: true
   mlc.economy.admin:
     description: "Administrator permission for the economy addon of minigamelolcow"
     default: op
@@ -79,3 +85,11 @@ permissions:
   mlc.calculator.calculate:
     description: "Allows the use of /calculate"
     default: not op
+  mlc.phones.admin:
+    description: "Administrator permission for phones addon of minigamelolcow"
+    default: op
+    children:
+      mlc.phones.phone: true
+  mlc.phones.phone:
+    description: "Allows the use of /phone"
+    default: op

@@ -5,6 +5,7 @@ import io.github.saphirdefeu.minigamelolcow.economy.Database;
 import io.github.saphirdefeu.minigamelolcow.economy.EconomyAddon;
 import io.github.saphirdefeu.minigamelolcow.listeners.Listeners;
 import io.github.saphirdefeu.minigamelolcow.nbtedit.NBTAddon;
+import io.github.saphirdefeu.minigamelolcow.phones.PhonesAddon;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -19,6 +20,7 @@ public final class Main extends JavaPlugin {
     private EconomyAddon econModule;
     private CalculatorAddon calcAddon;
     private NBTAddon nbtAddon;
+    private PhonesAddon phonesAddon;
 
     @Override
     public void onEnable() {
@@ -52,6 +54,11 @@ public final class Main extends JavaPlugin {
         if(config.getBoolean("addons.listeners.enabled")) {
             Logger.debug("Registering global events");
             Listeners.register(this);
+        }
+
+        if(config.getBoolean("addons.phones.enabled")) {
+            Logger.debug("Initializing Phones addon");
+            phonesAddon = new PhonesAddon(this);
         }
 
         Logger.debug("MLC enabled");
