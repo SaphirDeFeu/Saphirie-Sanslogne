@@ -58,7 +58,12 @@ public final class Main extends JavaPlugin {
 
         if(config.getBoolean("addons.phones.enabled")) {
             Logger.debug("Initializing Phones addon");
-            phonesAddon = new PhonesAddon(this);
+            try {
+                Class.forName("org.python.util.PythonInterpreter");
+                phonesAddon = new PhonesAddon(this);
+            } catch(ClassNotFoundException e) {
+                Logger.err("Cannot initialize Phones Addon: missing dependency 'org.python.util.PythonInterpreter'");
+            }
         }
 
         Logger.debug("MLC enabled");
@@ -71,6 +76,7 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
         Logger.debug("Disabling MLC");
         Database.close();
+        if(phonesAddon != null) phonesAddon.destroy();
         Logger.debug("MLC disabled");
     }
 

@@ -5,5 +5,7 @@ addons:
     enabled: true
   nbt:
     enabled: false # Experimental feature, enable at your own risk
+  phones:
+    enabled: false # Experimental feature, enable at your own risk
   listeners:
     enabled: true

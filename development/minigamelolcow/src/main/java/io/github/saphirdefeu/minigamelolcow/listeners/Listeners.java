@@ -10,6 +10,7 @@ public abstract class Listeners {
 
         pluginManager.registerEvents(new io.github.saphirdefeu.minigamelolcow.listeners.events.Time(), plugin);
         pluginManager.registerEvents(new io.github.saphirdefeu.minigamelolcow.listeners.events.Alerts(), plugin);
+        pluginManager.registerEvents(new io.github.saphirdefeu.minigamelolcow.listeners.events.PhoneReceive(), plugin);
 
     }
 

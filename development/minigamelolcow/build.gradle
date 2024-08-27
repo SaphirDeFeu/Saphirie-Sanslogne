@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "xyz.jpenilla.run-paper" version "2.3.0"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'io.github.saphirdefeu'
@@ -20,6 +21,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    implementation("org.python:jython-standalone:2.7.4")
 }
 
 def targetJavaVersion = 21
@@ -44,6 +46,16 @@ tasks {
     runServer {
         minecraftVersion "1.21"
     }
+}
+
+shadowJar {
+    archiveFileName.set("minigamelolcow-1.0.0-1.21.jar")
+
+    // Exclude specific files if necessary
+    // Example: exclude files to avoid conflicts
+    // exclude 'META-INF/*.SF'
+    // exclude 'META-INF/*.DSA'
+    // exclude 'META-INF/*.RSA'
 }
 
 processResources {
