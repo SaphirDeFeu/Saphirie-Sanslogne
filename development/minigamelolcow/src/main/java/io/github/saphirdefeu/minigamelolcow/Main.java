@@ -3,12 +3,14 @@ package io.github.saphirdefeu.minigamelolcow;
 import io.github.saphirdefeu.minigamelolcow.calculator.CalculatorAddon;
 import io.github.saphirdefeu.minigamelolcow.economy.Database;
 import io.github.saphirdefeu.minigamelolcow.economy.EconomyAddon;
-import io.github.saphirdefeu.minigamelolcow.listeners.Listeners;
 import io.github.saphirdefeu.minigamelolcow.nbtedit.NBTAddon;
 import io.github.saphirdefeu.minigamelolcow.phones.PhonesAddon;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -53,7 +55,8 @@ public final class Main extends JavaPlugin {
 
         if(config.getBoolean("addons.listeners.enabled")) {
             Logger.debug("Registering global events");
-            Listeners.register(this);
+            PluginManager pluginManager = this.getServer().getPluginManager();
+            pluginManager.registerEvents(new Listeners(), this);
         }
 
         if(config.getBoolean("addons.phones.enabled")) {
@@ -89,5 +92,13 @@ public final class Main extends JavaPlugin {
         }
 
         return usernames.contains(username);
+    }
+
+    public static void runTaskSync(JavaPlugin plugin, Runnable callback) {
+        Bukkit.getScheduler().runTask(plugin, callback);
+    }
+
+    public static String getComponentText(Component component) {
+        return PlainTextComponentSerializer.plainText().serialize(component);
     }
 }

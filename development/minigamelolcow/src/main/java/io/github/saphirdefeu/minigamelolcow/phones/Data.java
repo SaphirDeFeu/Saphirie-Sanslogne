@@ -1,16 +1,22 @@
 package io.github.saphirdefeu.minigamelolcow.phones;
 
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 
 public abstract class Data {
-    public static void init() {
+    public static File dataFolder;
+
+    public static void init(@NotNull JavaPlugin plugin) {
         Path directoryPath = Paths.get("plugins/MinigameLolCow/phones");
+        dataFolder = plugin.getDataFolder();
 
         try {
             if (!Files.exists(directoryPath)) {
@@ -31,11 +37,22 @@ public abstract class Data {
         return directoryPath;
     }
 
-    public static @NotNull Path resolvePath(@NotNull String id, @NotNull Path path) {
-        String formattedString = String.format("/plugins/MinigameLolCow/phones/%s/", id);
-        if(path.isAbsolute()) formattedString = String.format("/plugins/MinigameLolCow/phones/%s%s", id, path);
+    public static @NotNull Path resolvePath(@NotNull String id, @NotNull String path) {
+        String formattedString = String.format("./phones/%s/", id);
+        if(path.charAt(0) == '/') formattedString = String.format("./phones/%s%s", id, path);
 
-        return Path.of(formattedString);
+        Path resolvedPath = Path.of(formattedString);
+        Path absolutePath = Path.of(dataFolder.getAbsolutePath());
+        return absolutePath.resolve(resolvedPath).normalize();
+    }
+
+    public static void saveToFile(@NotNull String path, @NotNull String lines) {
+        byte[] bytes = lines.getBytes();
+        try {
+            Files.write(Path.of(path), bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static @NotNull Collection<Path> scanDirectory(@NotNull Path directory) {
@@ -50,6 +67,32 @@ public abstract class Data {
         }
 
         return paths;
+    }
+
+    public static @NotNull Collection<String> scanFile(@NotNull Path file) {
+        List<String> lines = List.of();
+        try {
+            lines = Files.readAllLines(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return lines;
+    }
+
+    public static Properties readPropertiesFile(Path path) {
+        // Create a Properties object to hold the properties
+        Properties properties = new Properties();
+
+        // Use a try-with-resources statement to ensure the InputStream is closed automatically
+        try (var inputStream = Files.newInputStream(path)) {
+            // Load properties from the input stream
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return properties;
     }
 
     private static void initializeRoot(@NotNull Path path) {
@@ -78,7 +121,6 @@ public abstract class Data {
 
                 // Optional: Initialize the 'apps.properties' file with some default properties
                 Properties properties = new Properties();
-                properties.setProperty("pineapple", "/");
 
                 try (var outputStream = Files.newOutputStream(appsPropertiesPath)) {
                     properties.store(outputStream, "Application Properties");

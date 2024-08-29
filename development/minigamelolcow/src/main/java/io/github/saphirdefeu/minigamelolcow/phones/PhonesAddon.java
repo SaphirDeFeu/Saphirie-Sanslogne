@@ -6,6 +6,7 @@ import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.python.util.PythonInterpreter;
 
@@ -13,12 +14,12 @@ import java.util.Properties;
 
 public final class PhonesAddon {
     public static final String RESOURCE_LOCATION = "mlc:phones";
-    private PythonInterpreter interpreter;
+    public static PythonInterpreter interpreter;
 
     public PhonesAddon(JavaPlugin plugin) {
-        Data.init();
-
-        initJython();
+        PluginManager pluginManager = plugin.getServer().getPluginManager();
+        pluginManager.registerEvents(new PhoneReceive(plugin), plugin);
+        Data.init(plugin);
 
         registerCommands(plugin);
     }
@@ -27,10 +28,7 @@ public final class PhonesAddon {
         Properties properties = new Properties();
         properties.put("python.import.site", "false");
         PythonInterpreter.initialize(System.getProperties(), properties, new String[0]);
-        interpreter = new PythonInterpreter();
 
-        // API exposition
-        interpreter.setOut(new Debug());
     }
 
     private void registerCommands(JavaPlugin plugin) {
