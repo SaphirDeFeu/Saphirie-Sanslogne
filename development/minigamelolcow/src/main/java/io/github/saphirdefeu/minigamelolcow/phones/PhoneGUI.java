@@ -394,7 +394,9 @@ public class PhoneGUI implements Listener {
             updateInventory(this.ownerID, this.currentPath, player, true);
             return;
         }
-        if(!this.currentPath.equals("home") && relativePath.equals("..")) {
+        boolean onHomeOrApp = this.currentPath.charAt(0) == 'h' && relativePath.equals("..");
+        boolean onRoot = this.currentPath.equals("/") && relativePath.equals("..");
+        if(onHomeOrApp || onRoot) {
             setCurrentPath("home");
             updateInventory(this.ownerID, this.currentPath, player, true);
             return;
