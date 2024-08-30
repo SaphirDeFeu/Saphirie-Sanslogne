@@ -59,6 +59,8 @@ public class PhoneGUI implements Listener {
     private int editLineIndex = 0;
     private boolean pullFromDisk = true;
 
+    private LinkedList<String> appPaths = new LinkedList<>();
+
     /**
      * Can only be filled if PhoneGUI.lines is empty
      */
@@ -181,11 +183,28 @@ public class PhoneGUI implements Listener {
     public void setHomeApps() {
         AtomicInteger index = new AtomicInteger(10);
         Path rootPath = Data.resolvePath(this.ownerID, " ");
-        Path path = rootPath.resolve("./apps/apps.properties").normalize();
-        Properties appLocationProperties = Data.readPropertiesFile(path);
+        Path path = rootPath.resolve("./apps/apps").normalize();
+        List<String> apps = List.of();
+        try {
+            apps = Files.readAllLines(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        appLocationProperties.forEach((key, value) -> {
-            Path appRootFolder = Data.resolvePath(this.ownerID, (String) value);
+        this.appPaths.clear();
+        for(String appPathString : apps) {
+            this.appPaths.add(String.format("/apps/%s", appPathString));
+        }
+
+        int startIndex = pageIndex * PAGE_SIZE;
+        int endIndex = (pageIndex + 1) * PAGE_SIZE;
+        int maxToGo = Math.min(endIndex, this.appPaths.size());
+        int currentPosition = pageIndex == 0 ? 10 : 9;
+
+        for(int i = startIndex; i < maxToGo; i++) {
+            String value = appPaths.get(i);
+
+            Path appRootFolder = Data.resolvePath(this.ownerID, value);
             Path appPropertiesPath = appRootFolder.resolve("./app.properties").normalize();
             Properties appProperties = Data.readPropertiesFile(appPropertiesPath);
 
@@ -213,9 +232,9 @@ public class PhoneGUI implements Listener {
             );
             app.setItemMeta(appMeta);
 
-            this.inventory.setItem(index.get(), app);
-            index.getAndIncrement();
-        });
+            this.inventory.setItem(currentPosition, app);
+            currentPosition++;
+        };
     }
 
     public void fillItems() {

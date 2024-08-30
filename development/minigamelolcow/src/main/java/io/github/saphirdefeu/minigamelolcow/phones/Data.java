@@ -114,17 +114,10 @@ public abstract class Data {
                 Files.createDirectory(dataPath);
             }
 
-            // Create 'apps.properties' file inside the 'apps/' directory
-            Path appsPropertiesPath = appsPath.resolve("apps.properties");
+            // Create 'apps' file inside the 'apps/' directory
+            Path appsPropertiesPath = appsPath.resolve("apps");
             if (Files.notExists(appsPropertiesPath)) {
                 Files.createFile(appsPropertiesPath);
-
-                // Optional: Initialize the 'apps.properties' file with some default properties
-                Properties properties = new Properties();
-
-                try (var outputStream = Files.newOutputStream(appsPropertiesPath)) {
-                    properties.store(outputStream, "Application Properties");
-                }
             }
 
         } catch (IOException e) {
