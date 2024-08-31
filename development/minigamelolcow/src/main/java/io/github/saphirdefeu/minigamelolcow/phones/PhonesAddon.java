@@ -19,7 +19,8 @@ public final class PhonesAddon {
     public PhonesAddon(JavaPlugin plugin) {
         PluginManager pluginManager = plugin.getServer().getPluginManager();
         pluginManager.registerEvents(new PhoneReceive(plugin), plugin);
-        Data.init(plugin);
+        Data.init();
+        Appstore.init();
 
         registerCommands(plugin);
     }

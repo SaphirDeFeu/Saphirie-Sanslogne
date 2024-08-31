@@ -1,5 +1,6 @@
 package io.github.saphirdefeu.minigamelolcow.phones;
 
+import io.github.saphirdefeu.minigamelolcow.Main;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,11 +13,9 @@ import java.util.List;
 import java.util.Properties;
 
 public abstract class Data {
-    public static File dataFolder;
 
-    public static void init(@NotNull JavaPlugin plugin) {
+    public static void init() {
         Path directoryPath = Paths.get("plugins/MinigameLolCow/phones");
-        dataFolder = plugin.getDataFolder();
 
         try {
             if (!Files.exists(directoryPath)) {
@@ -42,7 +41,7 @@ public abstract class Data {
         if(path.charAt(0) == '/') formattedString = String.format("./phones/%s%s", id, path);
 
         Path resolvedPath = Path.of(formattedString);
-        Path absolutePath = Path.of(dataFolder.getAbsolutePath());
+        Path absolutePath = Path.of(Main.getPluginDataFolder().getAbsolutePath());
         return absolutePath.resolve(resolvedPath).normalize();
     }
 

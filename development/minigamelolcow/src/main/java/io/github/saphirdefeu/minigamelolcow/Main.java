@@ -13,12 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
 public final class Main extends JavaPlugin {
     public static final String PREFIX = "[MLC-PL] ";
+    private static File pluginDataFolder;
     private EconomyAddon econModule;
     private CalculatorAddon calcAddon;
     private NBTAddon nbtAddon;
@@ -28,6 +30,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         // Récupérer la configuration, ou la créer si elle n'existe pas
         this.saveDefaultConfig(); // création d'une config défaut
+        pluginDataFolder = this.getDataFolder();
 
         Logger.debug("Enabling MLC");
 
@@ -92,6 +95,10 @@ public final class Main extends JavaPlugin {
         }
 
         return usernames.contains(username);
+    }
+
+    public static File getPluginDataFolder() {
+        return pluginDataFolder;
     }
 
     public static void runTaskSync(JavaPlugin plugin, Runnable callback) {

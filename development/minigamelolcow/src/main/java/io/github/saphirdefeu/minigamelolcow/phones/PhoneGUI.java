@@ -60,6 +60,7 @@ public class PhoneGUI implements Listener {
     private boolean pullFromDisk = true;
 
     private LinkedList<String> appPaths = new LinkedList<>();
+    private LinkedList<String> appStoreApps = new LinkedList<>();
 
     /**
      * Can only be filled if PhoneGUI.lines is empty
@@ -100,24 +101,62 @@ public class PhoneGUI implements Listener {
         int endIndex = (pageIndex + 1) * PAGE_SIZE;
 
         if(this.currentPath.equals("home")) {
-            ItemStack app = newItem(
-                    Material.BOOK,
-                    Component.text("Fichiers").color(NamedTextColor.GOLD)
-            );
-            ItemMeta appMeta = app.getItemMeta();
-            appMeta.getPersistentDataContainer().set(
-                    new NamespacedKey("mlc-pl", "phonebutton"),
-                    PersistentDataType.STRING,
-                    "app_root:explorer"
-            );
-            app.lore(List.of(
-                    Component.text("Explorateur de fichiers").color(NamedTextColor.GRAY)
-            ));
-            app.setItemMeta(appMeta);
+            ItemStack explorer;
+            ItemStack appStore;
+            {
+                explorer = newItem(
+                        Material.BOOK,
+                        Component.text("Fichiers").color(NamedTextColor.GOLD)
+                );
+                ItemMeta appMeta = explorer.getItemMeta();
+                appMeta.getPersistentDataContainer().set(
+                        new NamespacedKey("mlc-pl", "phonebutton"),
+                        PersistentDataType.STRING,
+                        "app_root:explorer"
+                );
+                explorer.lore(List.of(
+                        Component.text("Explorateur de fichiers").color(NamedTextColor.GRAY)
+                ));
+                explorer.setItemMeta(appMeta);
+            }
+            {
+                appStore = newItem(
+                        Material.EMERALD_BLOCK,
+                        Component.text("Pineapp Store").color(NamedTextColor.GREEN)
+                );
+                ItemMeta appStoreMeta = appStore.getItemMeta();
+                appStoreMeta.getPersistentDataContainer().set(
+                        new NamespacedKey("mlc-pl", "phonebutton"),
+                        PersistentDataType.STRING,
+                        "app_root:appstore"
+                );
+                appStore.setItemMeta(appStoreMeta);
+            }
 
-            this.inventory.setItem(9, app);
+            this.inventory.setItem(9, explorer);
+            this.inventory.setItem(10, appStore);
 
             setHomeApps();
+            return;
+        }
+
+        if(this.currentPath.equals("home/appstore")) {
+            // Add a way to leave
+            ItemStack item = newItem(
+                    Material.REDSTONE_BLOCK,
+                    Component.text("Quitter").color(NamedTextColor.DARK_RED)
+            );
+            ItemMeta mm = item.getItemMeta();
+            mm.getPersistentDataContainer().set(
+                    new NamespacedKey("mlc-pl", "phonebutton"),
+                    PersistentDataType.STRING,
+                    "quit"
+            );
+            item.setItemMeta(mm);
+            this.inventory.setItem(0, item);
+
+
+
             return;
         }
 
@@ -181,7 +220,6 @@ public class PhoneGUI implements Listener {
     }
 
     public void setHomeApps() {
-        AtomicInteger index = new AtomicInteger(10);
         Path rootPath = Data.resolvePath(this.ownerID, " ");
         Path path = rootPath.resolve("./apps/apps").normalize();
         List<String> apps = List.of();
@@ -199,7 +237,7 @@ public class PhoneGUI implements Listener {
         int startIndex = pageIndex * PAGE_SIZE;
         int endIndex = (pageIndex + 1) * PAGE_SIZE;
         int maxToGo = Math.min(endIndex, this.appPaths.size());
-        int currentPosition = pageIndex == 0 ? 10 : 9;
+        int currentPosition = pageIndex == 0 ? 11 : 9;
 
         for(int i = startIndex; i < maxToGo; i++) {
             String value = appPaths.get(i);
@@ -260,7 +298,7 @@ public class PhoneGUI implements Listener {
             lines.clear();
         }
 
-        if(!this.currentPath.equals("home") && this.currentPath.charAt(0) != '/') {
+        if(!this.currentPath.equals("home") && this.currentPath.charAt(0) != '/' && !this.currentPath.equals("home/appstore")) {
             // Must be an app
             ItemStack item = newItem(
                     Material.REDSTONE_BLOCK,
@@ -297,7 +335,7 @@ public class PhoneGUI implements Listener {
         }
 
         // If using the explorer, add the back button
-        if(!this.currentPath.equals("home")) {
+        if(this.currentPath.charAt(0) == '/') {
             setExplorerButtons();
         }
 
@@ -393,7 +431,7 @@ public class PhoneGUI implements Listener {
         ent.openInventory(inventory);
     }
 
-    public ItemStack newItem(Material material, Component name) {
+    public static ItemStack newItem(Material material, Component name) {
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.itemName(name);
@@ -460,6 +498,10 @@ public class PhoneGUI implements Listener {
         switch(phoneButtonType) {
             case "app_root:explorer": {
                 this.modifyPath("/", p);
+                return;
+            }
+            case "app_root:appstore": {
+                this.modifyPath("appstore", p);
                 return;
             }
             case "back": {
