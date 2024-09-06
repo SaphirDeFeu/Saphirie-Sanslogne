@@ -1,6 +1,7 @@
 package io.github.saphirdefeu.minigamelolcow.calculator.cmd;
 
 import io.github.saphirdefeu.minigamelolcow.Logger;
+import io.github.saphirdefeu.minigamelolcow.Main;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Bukkit;
@@ -43,18 +44,7 @@ public class Calculate implements BasicCommand {
         String str;
 
         if(doTime) {
-            Score daytime = obj.getScore("daytime");
-            int ticks = daytime.getScore();
-
-            float tick_hour = ((float)ticks) / 1000.0f;
-            int hour = (6 + ((int)tick_hour)) % 24;
-
-            int tick_minute = ticks % 1000;
-            float minutes_with_sec = ((float) tick_minute) / (16.0f + 2.0f / 3.0f);
-
-            float seconds = (minutes_with_sec % 1.0f) * 60.0f;
-
-            str = String.format("%d:%d:%.3f", hour, (int) minutes_with_sec, seconds);
+            str = Main.getCurrentTime();
         } else {
             int days = obj.getScore("day").getScore() + 1;
             long year = 1;

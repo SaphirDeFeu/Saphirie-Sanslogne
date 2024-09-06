@@ -1,11 +1,15 @@
 addons:
   economy:
-    enabled: true
+    enabled: false
   calculator:
-    enabled: true
+    enabled: false
   nbt:
     enabled: false # Experimental feature, enable at your own risk
   phones:
     enabled: false # Experimental feature, enable at your own risk
   listeners:
     enabled: true
+  discord:
+    enabled: false
+    token: ""
+    webhook_url: ""

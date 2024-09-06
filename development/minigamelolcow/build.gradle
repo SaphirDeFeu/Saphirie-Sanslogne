@@ -22,6 +22,10 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     implementation("org.python:jython-standalone:2.7.4")
+    implementation("net.dv8tion:JDA:5.1.0") {
+        exclude module: 'opus-java'
+    }
+    implementation("club.minnced:discord-webhooks:0.8.4")
 }
 
 def targetJavaVersion = 21
