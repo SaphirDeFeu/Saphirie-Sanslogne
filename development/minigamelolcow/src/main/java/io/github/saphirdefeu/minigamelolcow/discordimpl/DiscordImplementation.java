@@ -69,6 +69,12 @@ public final class DiscordImplementation {
     public void destroy() {
         jda.shutdown();
         if(webhookClient != null) webhookClient.close();
+
+        try {
+            jda.awaitShutdown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static WebhookClient getWebhookClient() {
