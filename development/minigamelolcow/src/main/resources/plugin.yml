@@ -1,5 +1,5 @@
 name: minigamelolcow
-version: '1.0.0-1.21'
+version: '1.21.1'
 main: io.github.saphirdefeu.minigamelolcow.Main
 api-version: '1.21'
 prefix: "MLC-PL"
@@ -52,6 +52,9 @@ commands:
     usage: /phone [identifier]
     permission: mlc.phones.phone
     permission-message: "You do not have permission to run this command"
+  broadcasttime:
+    description: Broadcasts the day to Discord
+    usage: /broadcasttime
 
 permissions:
   mlc.admin:

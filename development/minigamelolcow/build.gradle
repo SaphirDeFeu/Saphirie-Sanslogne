@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.github.saphirdefeu'
-version = '1.0.0-1.21'
+version = '1.21.1'
 
 repositories {
     mavenCentral()
@@ -48,12 +48,12 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks {
     runServer {
-        minecraftVersion "1.21"
+        minecraftVersion "1.21.1"
     }
 }
 
 shadowJar {
-    archiveFileName.set("minigamelolcow-1.0.0-1.21.jar")
+    archiveFileName.set("minigamelolcow-1.21.1.jar")
 
     // Exclude specific files if necessary
     // Example: exclude files to avoid conflicts
