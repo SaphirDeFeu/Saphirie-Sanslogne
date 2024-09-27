@@ -15,7 +15,7 @@ import java.util.Properties;
 public abstract class Data {
 
     public static void init() {
-        Path directoryPath = Paths.get("plugins/MinigameLolCow/phones");
+        Path directoryPath = Paths.get("plugins/minigamelolcow/phones");
 
         try {
             if (!Files.exists(directoryPath)) {
@@ -28,7 +28,7 @@ public abstract class Data {
     }
 
     public static @NotNull Path getRoot(@NotNull String id) {
-        Path directoryPath = Paths.get("plugins/MinigameLolCow/phones/" + id.toLowerCase().replaceAll(" ", "_"));
+        Path directoryPath = Paths.get("plugins/minigamelolcow/phones/" + id.toLowerCase().replaceAll(" ", "_"));
         if (!Files.exists(directoryPath)) {
             initializeRoot(directoryPath);
         }

@@ -24,7 +24,7 @@ public class Appstore {
     private static Path appstoreDirectory;
 
     public static void init() {
-        Path directoryPath = Paths.get("plugins/MinigameLolCow/appstore");
+        Path directoryPath = Paths.get("plugins/minigamelolcow/appstore");
         appstoreDirectory = directoryPath;
 
         try {

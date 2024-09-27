@@ -1,6 +1,7 @@
 package io.github.saphirdefeu.minigamelolcow.discordimpl.eventlisteners;
 
 import io.github.saphirdefeu.minigamelolcow.Main;
+import io.github.saphirdefeu.minigamelolcow.discordimpl.Landmark;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -9,6 +10,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SlashCommandReceived extends ListenerAdapter {
 
@@ -38,6 +43,24 @@ public class SlashCommandReceived extends ListenerAdapter {
 
         String playerName = playerNameOptionMapping.getAsString();
 
+        Landmark[] landmarks = {
+                new Landmark("ZISO", -957, -277),
+                new Landmark("Centre de la Grande Forêt Occidentale", -1237, 152),
+                new Landmark("Quartier résidentiel de l'Ancienne Cité saphiriq", -421, -472),
+                new Landmark("Banque nationale", -77, -554),
+                new Landmark("Quartier résidentiel de Ckulsol sanslognien", 249, -379),
+                new Landmark("Assemblée Nationale de l'Union", -196, -260),
+                new Landmark("Assemblée Régionale saphiriq", -177, -124),
+                new Landmark("Centre de Colonz", -170, 135),
+                new Landmark("El Pozo", 214, -72),
+                new Landmark("Feniks", -246, -410),
+                new Landmark("Assemblée Régionale sanslognienne", -76, -697),
+                new Landmark("Athena, centre-ville", 919, -202),
+                new Landmark("Palais d'Athena", 621, 68),
+                new Landmark("Océan sur les côtés d'Athena", 982, 54),
+                new Landmark("HouseWants", 105, 182)
+        };
+
         Bukkit.getScheduler().runTask(plugin, () -> {
             Player player = Bukkit.getPlayer(playerName);
             if(player == null) {
@@ -47,19 +70,48 @@ public class SlashCommandReceived extends ListenerAdapter {
 
             Location loc = player.getLocation();
 
-            String discordMessage = String.format("**%s** se situe à X:%d Y:%d Z:%d",
+            int x = loc.getBlockX();
+            int z = loc.getBlockZ();
+            double[] distances = new double[landmarks.length];
+            for(int i = 0; i < landmarks.length; i++) {
+                Landmark landmark = landmarks[i];
+                int differenceX = Math.abs(landmark.x - x);
+                int differenceZ = Math.abs(landmark.z - z);
+                double distance = Math.sqrt(differenceX * differenceX + differenceZ * differenceZ);
+                distances[i] = distance;
+            }
+
+            Integer[] indices = new Integer[distances.length];
+            for (int i = 0; i < distances.length; i++) {
+                indices[i] = i;
+            }
+
+            Arrays.sort(indices, Comparator.comparingDouble(i -> distances[i]));
+
+            StringBuilder discordMessage = new StringBuilder(String.format("**%s** se situe à X:%d Y:%d Z:%d",
                     playerName,
-                    loc.getBlockX(),
+                    x,
                     loc.getBlockY(),
-                    loc.getBlockZ()
-            );
+                    z
+            ));
+
+            for(int i = 0; i < 3; i++) {
+                int index = indices[i];
+
+                String toAdd = String.format("Le joueur se situe à ~**%d** blocs de **%s**",
+                        (int) distances[index],
+                        landmarks[index].name
+                );
+
+                discordMessage.append("\n").append(toAdd);
+            }
 
             String minecraftMessage = String.format("<blue>[Discord] <bold>%s</bold> a récupéré votre position.</blue>",
                     event.getUser().getName()
             );
 
             player.sendRichMessage(minecraftMessage);
-            event.getHook().sendMessage(discordMessage).queue();
+            event.getHook().sendMessage(discordMessage.toString()).queue();
         });
 
 
@@ -77,5 +129,6 @@ public class SlashCommandReceived extends ListenerAdapter {
             event.getHook().sendMessage(msg).queue();
         });
     }
+
 
 }

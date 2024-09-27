@@ -1,6 +1,7 @@
 package io.github.saphirdefeu.minigamelolcow.economy;
 
 import io.github.saphirdefeu.minigamelolcow.Logger;
+import io.github.saphirdefeu.minigamelolcow.Main;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -29,8 +30,8 @@ public abstract class Database {
             return 1;
         }
 
-        Path directoryPath = Paths.get("plugins/MinigameLolCow");
-        Path filePath = directoryPath.resolve("balances.db");
+        Path directoryPath = Main.getPluginDataFolder().toPath();
+        Path filePath = directoryPath.resolve("balances.db").normalize();
 
         // Si elle n'existe pas, on en crée une nouvelle
         try {
@@ -48,7 +49,7 @@ public abstract class Database {
 
         // Créer une table pour enregistrer les comptes
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:plugins/MinigameLolCow/balances.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:plugins/minigamelolcow/balances.db");
             String sql = "CREATE TABLE IF NOT EXISTS accounts (" +
                     "username TEXT PRIMARY KEY NOT NULL," +
                     "balance REAL NOT NULL," +
@@ -58,7 +59,7 @@ public abstract class Database {
                 statement.execute(sql);
             }
         } catch (SQLException e) {
-            Logger.err(String.format("SQLException: cannot connect to database 'MinigameLolCow/balances.db' or attempt to create statement failed.\n%s", e));
+            Logger.err(String.format("SQLException: cannot connect to database 'minigamelolcow/balances.db' or attempt to create statement failed.\n%s", e));
             return 1;
         }
 
