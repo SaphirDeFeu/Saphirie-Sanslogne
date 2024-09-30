@@ -47,6 +47,9 @@ public class Calculate implements BasicCommand {
             str = Main.getCurrentTime();
         } else {
             int days = obj.getScore("day").getScore() + 1;
+            if(obj.getScore("daytime").getScore() > 18000) {
+                days++;
+            }
             long year = 1;
             byte month = 1;
             byte date = 1;
