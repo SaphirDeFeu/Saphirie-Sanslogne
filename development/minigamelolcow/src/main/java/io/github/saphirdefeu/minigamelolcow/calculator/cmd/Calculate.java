@@ -56,9 +56,9 @@ public class Calculate implements BasicCommand {
 
             byte dayNameIndex = 0;
 
-            byte daysInMonths[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-            String dayNames[] = { "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche" };
-            String months[] = {
+            byte[] daysInMonths = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            String[] dayNames = { "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche" };
+            String[] months = {
                     "Janvier",
                     "Fevrier",
                     "Mars",
