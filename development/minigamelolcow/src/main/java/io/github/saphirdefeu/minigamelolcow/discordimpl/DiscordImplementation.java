@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,6 +58,10 @@ public final class DiscordImplementation {
         if(webhookUrl.isEmpty()) return;
 
         webhookClient = WebhookClient.withUrl(webhookUrl);
+        webhookClient.send(":green_circle: Le serveur s'allume");
+
+        PluginManager pluginManager = plugin.getServer().getPluginManager();
+        pluginManager.registerEvents(new GameEventListener(), plugin);
 
         LifecycleEventManager<Plugin> manager = plugin.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
@@ -67,6 +72,7 @@ public final class DiscordImplementation {
     }
 
     public void destroy() {
+        webhookClient.send(":red_circle: Le serveur s'éteint");
         jda.shutdown();
         if(webhookClient != null) webhookClient.close();
 
