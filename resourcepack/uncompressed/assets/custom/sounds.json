@@ -12,7 +12,7 @@
   "music.forestcave.battle": {
     "sounds": ["custom:music/forestcave/battle"]
   },
-  "music_disc.audiolog.log_one" {
+  "music_disc.audiolog.log_one": {
     "sounds": ["custom:music_disc/audiolog/log1"]
   }
 }
