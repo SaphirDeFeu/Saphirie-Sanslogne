@@ -69,9 +69,9 @@ public class PhoneGUI implements Listener {
 
     public PhoneGUI(@NotNull JavaPlugin plugin, @NotNull String owner) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            this.jythonInterpreter = new PythonInterpreter();
+            jythonInterpreter = new PythonInterpreter();
             jythonInterpreter.set("GUI", new InventoryWrapper(this));
-            jythonInterpreter.set("Item", ItemStackWrapper.class);
+            jythonInterpreter.set("Item", new ItemStackWrapper(this));
             this.loadingDone = true;
             for(int i = this.SIZE - 9; i < this.SIZE; i++) {
                 this.inventory.setItem(i, newItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, Component.empty()));
@@ -657,6 +657,7 @@ public class PhoneGUI implements Listener {
             }
             modifyPath(appID, p);
             Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+
                 jythonInterpreter.exec(String.format(
                         "import sys\nsys.path = ['%s/', '%s/']",
                         appRootFolder.toString().replace("\\", "/"),
