@@ -7,10 +7,12 @@
     "subtitle": "item.taser.hit"
   },
   "entity.dealer.talk": {
-  "sounds": ["custom:entity/dealer/talk1", "custom:entity/dealer/talk2"]
+    "sounds": ["custom:entity/dealer/talk1", "custom:entity/dealer/talk2"]
   },
   "music.forestcave.battle": {
     "sounds": ["custom:music/forestcave/battle"]
+  },
+  "music_disc.audiolog.log_one" {
+    "sounds": ["custom:music_disc/audiolog/log1"]
   }
-
 }
