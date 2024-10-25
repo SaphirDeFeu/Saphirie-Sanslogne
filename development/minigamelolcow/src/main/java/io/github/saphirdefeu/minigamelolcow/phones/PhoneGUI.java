@@ -3,9 +3,10 @@ package io.github.saphirdefeu.minigamelolcow.phones;
 import io.github.saphirdefeu.minigamelolcow.Listeners;
 import io.github.saphirdefeu.minigamelolcow.Logger;
 import io.github.saphirdefeu.minigamelolcow.Main;
-import io.github.saphirdefeu.minigamelolcow.phones.api.Debug;
+import io.github.saphirdefeu.minigamelolcow.phones.api.InteractiveHandlers;
 import io.github.saphirdefeu.minigamelolcow.phones.api.InventoryWrapper;
 import io.github.saphirdefeu.minigamelolcow.phones.api.ItemStackWrapper;
+import io.github.saphirdefeu.minigamelolcow.phones.api.Sounds;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -34,7 +35,6 @@ import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PhoneGUI implements Listener {
     private final JavaPlugin plugin;
@@ -67,11 +67,17 @@ public class PhoneGUI implements Listener {
      */
     private LinkedList<Path> directoryEntries = new LinkedList<>(); // When exploring a folder
 
-    public PhoneGUI(@NotNull JavaPlugin plugin, @NotNull String owner) {
+    // Only to be used during interpreting of python files
+    private LinkedList<HandleWrapper> handlers = new LinkedList<>();
+    private Thread currentTask;
+
+    public PhoneGUI(@NotNull JavaPlugin plugin, @NotNull String owner, @NotNull Player player) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             jythonInterpreter = new PythonInterpreter();
             jythonInterpreter.set("GUI", new InventoryWrapper(this));
             jythonInterpreter.set("Item", new ItemStackWrapper(this));
+            jythonInterpreter.set("InteractiveHandlers", new InteractiveHandlers(this));
+            jythonInterpreter.set("Sounds", new Sounds(this, player));
             this.loadingDone = true;
             for(int i = this.SIZE - 9; i < this.SIZE; i++) {
                 this.inventory.setItem(i, newItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, Component.empty()));
@@ -79,7 +85,7 @@ public class PhoneGUI implements Listener {
         });
         this.plugin = plugin;
 
-        updateInventory(owner, currentPath, null, false);
+        updateInventory(owner, currentPath, player, true);
     }
 
     public void updateInventory(@NotNull String owner, @NotNull String title, @Nullable HumanEntity player, boolean reopen) {
@@ -578,8 +584,8 @@ public class PhoneGUI implements Listener {
                 return;
             }
             case "quit": {
-                this.jythonInterpreter.close();
-                this.modifyPath("..", p);
+                this.currentTask.interrupt();
+                this.inventory.close();
                 return;
             }
             default: { break; }
@@ -632,13 +638,14 @@ public class PhoneGUI implements Listener {
             editLineIndex = Integer.parseInt(split[1]);
             this.inventory.close();
             String msg = String.format(
-                    "<green>Modification de la ligne %d</green><br>%s",
+                    "<green>Modification de la ligne %d</green><br><insert:\"%s\">%s</insert>",
                     editLineIndex+1,
+                    lines.get(editLineIndex).replaceAll(":", "\\:").replaceAll("\"", "\\\""),
                     lines.get(editLineIndex)
             );
             Listeners.getStringFromUser(p, msg, input -> {
                 Main.runTaskSync(this.plugin, () -> {
-                    this.lines.set(editLineIndex, input);
+                    this.lines.set(editLineIndex, input.replaceAll("\\$", "  "));
                     this.pullFromDisk = false;
                     this.modifyPath(".", p);
                 });
@@ -656,21 +663,48 @@ public class PhoneGUI implements Listener {
                 Logger.warn(String.format("phone-%s encountered an error: main script file for %s is missing", this.ownerID, split[1]));
             }
             modifyPath(appID, p);
-            Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
 
-                jythonInterpreter.exec(String.format(
-                        "import sys\nsys.path = ['%s/', '%s/']",
-                        appRootFolder.toString().replace("\\", "/"),
-                        appRootFolder.toString().replace("\\", "/")
+            this.handlers = new LinkedList<>();
+
+            this.currentTask = new Thread(() -> {
+
+                jythonInterpreter.exec(String.format( // Set app metadata
+                        "__app = {'name': '%s'}",
+                        appID.replaceAll("'", "_")
                 ));
 
                 try {
                     jythonInterpreter.execfile(mainScriptFile.toString());
-                } catch(Exception ex) {
+                    while(!Thread.currentThread().isInterrupted()) {}
+                    jythonInterpreter.cleanup();
+                    jythonInterpreter.close();
+
+                    Bukkit.getScheduler().runTask(this.plugin, () -> {
+                        this.inventory.close();
+                        p.sendRichMessage("<green>Closing application - You may reopen your phone at any time</green>");
+                    });
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
-                    if(jythonInterpreter != null) jythonInterpreter.cleanup();
+                    if (jythonInterpreter != null) jythonInterpreter.cleanup();
                 }
+
+            });
+
+            this.currentTask.start();
+        }
+
+        if(split[0].equals("event")) {
+            // We're probably in an app and there's an interactive handler being pressed down
+            HandleWrapper handleWrapper;
+            String idLooker = String.format("%s:%s", split[1], split[2]); // The id we're looking for
+            // Basically iterate through all handlers and find the corresponding one
+            handleWrapper = this.handlers.stream().filter(handle -> handle.getNamespacedId().equals(idLooker)).findFirst().orElse(null);
+
+            if(handleWrapper == null) return;
+
+            Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+                handleWrapper.getRunnable().run();
             });
         }
     }
@@ -689,5 +723,9 @@ public class PhoneGUI implements Listener {
 
     public int getSize() {
         return SIZE;
+    }
+
+    public void addInteractiveHandler(String type, String appName, String id, Runnable runnable) {
+        this.handlers.add(new HandleWrapper(type, String.format("%s:%s", appName, id), runnable));
     }
 }

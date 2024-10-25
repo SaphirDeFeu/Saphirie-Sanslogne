@@ -25,10 +25,9 @@ public class ItemStackWrapper extends ItemStack {
         return new ItemStack(mat);
     }
 
-    public ItemStack createButton(@NotNull String material, @NotNull String name, @NotNull Runnable execute) {
-        ItemStack item = this.createItem(material);
+    public ItemStack attachHandler(@NotNull ItemStack item, @NotNull String handler) {
         ItemMeta mm = item.getItemMeta();
-        mm.getPersistentDataContainer().set(new NamespacedKey("mlc-pl", appName), PersistentDataType.STRING, name);
+        mm.getPersistentDataContainer().set(new NamespacedKey("mlc-pl", "phonebutton"), PersistentDataType.STRING, handler);
         item.setItemMeta(mm);
         return item;
     }

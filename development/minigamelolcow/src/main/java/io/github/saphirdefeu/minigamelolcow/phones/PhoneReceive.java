@@ -32,10 +32,10 @@ public class PhoneReceive implements Listener {
         @Nullable String owner = mm.get(key, PersistentDataType.STRING);
         if(owner == null) return;
 
-        PhoneGUI phoneGUI = new PhoneGUI(this.plugin, owner);
+        PhoneGUI phoneGUI = new PhoneGUI(this.plugin, owner, event.getPlayer());
         PluginManager pluginManager = plugin.getServer().getPluginManager();
         pluginManager.registerEvents(phoneGUI, plugin);
 
-        phoneGUI.openInventory(event.getPlayer());
+        // phoneGUI.openInventory(event.getPlayer());
     }
 }
