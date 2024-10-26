@@ -91,19 +91,19 @@ public final class Main extends JavaPlugin {
         }
 
         Bukkit.getServer().getConsoleSender().sendRichMessage("<br><green>---------------------------------</green><br>" +
-        "<gold>#<white>#############<blue>###################<br>" +
-        "<gold>####<white>#############<blue>################<br>" +
-        "<gold>#######<white>#############<blue>#############<br>" +
-        "<gold>##########<white>#############<blue>##########<br>" +
-        "<gold>#############<white>#############<blue>#######<br>" +
-        "<gold>################<white>#############<blue>####<br>" +
-        "<gold>###################<white>#############<blue>#<br>" +
+        "<#ff7000>#<white>#############<blue>###################<br>" +
+        "<#ff7000>####<white>#############<blue>################<br>" +
+        "<#ff7000>#######<white>#############<blue>#############<br>" +
+        "<#ff7000>##########<white>#############<blue>##########<br>" +
+        "<#ff7000>#############<white>#############<blue>#######<br>" +
+        "<#ff7000>################<white>#############<blue>####<br>" +
+        "<#ff7000>###################<white>#############<blue>#<br>" +
         "<green>---------------------------------</green>");
 
         Bukkit.getServer().getConsoleSender().sendRichMessage("<rainbow>MLC enabled</rainbow><br>" +
                 "<blue>Gloire a la Sanslogne.</blue> " +
                 "<white>Longue vie a l'Union.</white> " +
-                "<gold>Gloire a la Saphirie.</gold>");
+                "<#ff7000>Gloire a la Saphirie.<white></white>");
     }
 
     public void onLoad() {}
