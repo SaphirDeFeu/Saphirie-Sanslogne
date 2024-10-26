@@ -640,12 +640,12 @@ public class PhoneGUI implements Listener {
             String msg = String.format(
                     "<green>Modification de la ligne %d</green><br><insert:\"%s\">%s</insert>",
                     editLineIndex+1,
-                    lines.get(editLineIndex).replaceAll(":", "\\:").replaceAll("\"", "\\\""),
+                    lines.get(editLineIndex).replaceAll("\"", "\\\\\"").replaceAll(" {2}", "`"),
                     lines.get(editLineIndex)
             );
             Listeners.getStringFromUser(p, msg, input -> {
                 Main.runTaskSync(this.plugin, () -> {
-                    this.lines.set(editLineIndex, input.replaceAll("\\$", "  "));
+                    this.lines.set(editLineIndex, input.replaceAll("`", "  "));
                     this.pullFromDisk = false;
                     this.modifyPath(".", p);
                 });
