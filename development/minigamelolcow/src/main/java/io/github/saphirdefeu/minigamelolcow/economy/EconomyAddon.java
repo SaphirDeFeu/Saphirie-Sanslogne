@@ -4,9 +4,8 @@ import io.papermc.paper.command.brigadier.Commands;
 import io.github.saphirdefeu.minigamelolcow.Logger;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
-import org.bukkit.Bukkit;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.saphirdefeu.minigamelolcow.economy.cmd.*;
@@ -32,6 +31,9 @@ public final class EconomyAddon {
         } else {
             Logger.debug(RESOURCE_LOCATION + " - Economy addon initialized");
         }
+
+        PluginManager pluginManager = plugin.getServer().getPluginManager();
+        pluginManager.registerEvents(new DepositListener(), plugin);
 
         registerCommands(plugin);
     }
