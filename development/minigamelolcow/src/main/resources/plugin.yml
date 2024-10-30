@@ -55,6 +55,11 @@ commands:
   broadcasttime:
     description: Broadcasts the day to Discord
     usage: /broadcasttime
+  download:
+    description: Downloads a ZIP file from a URL and decompresses it into your Pineapple phone
+    usage: /download <owner> <path> <url>
+    permission: mlc.phones.admin
+    permission-message: "You do not have permission do run this command"
 
 permissions:
   mlc.admin:

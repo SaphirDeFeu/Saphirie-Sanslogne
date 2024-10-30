@@ -38,6 +38,7 @@ public final class PhonesAddon {
             final Commands commands = event.registrar();
 
             commands.register(Phone.name, Phone.description, Phone.aliases, new Phone());
+            commands.register(Download.name, Download.description, Download.aliases, new Download());
         });
     }
 
