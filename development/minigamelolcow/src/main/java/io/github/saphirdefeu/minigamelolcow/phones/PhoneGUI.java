@@ -3,10 +3,7 @@ package io.github.saphirdefeu.minigamelolcow.phones;
 import io.github.saphirdefeu.minigamelolcow.Listeners;
 import io.github.saphirdefeu.minigamelolcow.Logger;
 import io.github.saphirdefeu.minigamelolcow.Main;
-import io.github.saphirdefeu.minigamelolcow.phones.api.InteractiveHandlers;
-import io.github.saphirdefeu.minigamelolcow.phones.api.InventoryWrapper;
-import io.github.saphirdefeu.minigamelolcow.phones.api.ItemStackWrapper;
-import io.github.saphirdefeu.minigamelolcow.phones.api.Sounds;
+import io.github.saphirdefeu.minigamelolcow.phones.api.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -78,6 +75,7 @@ public class PhoneGUI implements Listener {
             jythonInterpreter.set("Item", new ItemStackWrapper(this));
             jythonInterpreter.set("InteractiveHandlers", new InteractiveHandlers(this));
             jythonInterpreter.set("Sounds", new Sounds(this, player));
+            jythonInterpreter.set("Server", new Server(player));
             this.loadingDone = true;
             for(int i = this.SIZE - 9; i < this.SIZE; i++) {
                 this.inventory.setItem(i, newItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, Component.empty()));
