@@ -30,5 +30,6 @@ public class ReasonStop implements BasicCommand {
         }
 
         String msg = String.format(":grey_question: Message de type **%s** pour cause: %s", type, all_args);
+        client.send(msg);
     }
 }
