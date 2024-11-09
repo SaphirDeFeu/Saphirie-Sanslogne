@@ -13,24 +13,22 @@ import java.util.List;
 
 public class ReasonStop implements BasicCommand {
 
-    public static final String name = "rstop";
+    public static final String name = "com";
     public static final Collection<String> aliases = List.of();
-    public static final String description = "Stops and records a reason for stopping to the discord bot";
+    public static final String description = "Communicates a message to the discord #logs channel";
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
         WebhookClient client = DiscordImplementation.getWebhookClient();
         String[] date = Main.getCurrentDate();
+        String type = args[0].toUpperCase();
         StringBuilder all_args = new StringBuilder();
-        for(String arg : args) {
+        for(int i = 1; i < args.length; i++) {
+            String arg = args[i];
             all_args.append(arg);
             all_args.append(" ");
         }
 
-        String msg = String.format(":grey_question: Le serveur s'arrête pour cause: %s", all_args);
-        client.send(msg);
-
-        // Minestrator est une p*te du coup /stop est considéré comme un crash et force un redémarrage.
-        // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:stop");
+        String msg = String.format(":grey_question: Message de type **%s** pour cause: %s", type, all_args);
     }
 }
