@@ -16,7 +16,7 @@ public class MessageReceived extends ListenerAdapter {
         if(!msg.getMentions().isMentioned(DiscordImplementation.getJda().getSelfUser(), Message.MentionType.USER)) return;
 
         String[] messages = {
-                "Legalement, je ne sais pas si on peut mettre des accents dans ces messages: éàù?! aussi c'est un test je vérifies si cela fonctionne."
+                "Aucun message disponible à part celui-ci. GG à <@548922318852849671> pour sa fainéantise"
         };
         Random rng = new Random();
         // int num = rng.nextInt(messages.length);
