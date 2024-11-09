@@ -2,6 +2,7 @@ package io.github.saphirdefeu.minigamelolcow.discordimpl;
 
 import club.minnced.discord.webhook.WebhookClient;
 import io.github.saphirdefeu.minigamelolcow.Logger;
+import io.github.saphirdefeu.minigamelolcow.discordimpl.cmd.ReasonStop;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.eventlisteners.MessageReceived;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.eventlisteners.SlashCommandReceived;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.cmd.BroadcastTime;
@@ -68,6 +69,7 @@ public final class DiscordImplementation {
             final io.papermc.paper.command.brigadier.Commands commands = event.registrar();
 
             commands.register(BroadcastTime.name, BroadcastTime.description, BroadcastTime.aliases, new BroadcastTime());
+            commands.register(ReasonStop.name, ReasonStop.description, ReasonStop.aliases, new ReasonStop());
         });
     }
 
@@ -85,5 +87,9 @@ public final class DiscordImplementation {
 
     public static WebhookClient getWebhookClient() {
         return webhookClient;
+    }
+
+    public static JDA getJda() {
+        return jda;
     }
 }
