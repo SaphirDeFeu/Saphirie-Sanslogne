@@ -77,8 +77,9 @@ public class MessageReceived extends ListenerAdapter {
 
         ArrayList<Double> probs = new ArrayList<>();
 
-        for(int i = 0; i < counts.length; i++) {
-            probs.add(counts[i] / total);
+        for (int count : counts) {
+            if(total == 0) break;
+            probs.add(count / total);
         }
 
         double[] probabilities = probs.stream().mapToDouble(d -> d).toArray();
