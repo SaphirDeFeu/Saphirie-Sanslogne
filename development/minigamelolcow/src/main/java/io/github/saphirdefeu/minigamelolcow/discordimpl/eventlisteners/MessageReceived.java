@@ -50,55 +50,40 @@ public class MessageReceived extends ListenerAdapter {
                 "Je propose Libération au n°14"
         });
 
-        int countFinance = countOccurrences(raw, "thune", "finance", "argent", "monnaie", "money", "$", "€");
-        int countLgbt = countOccurrences(raw, "lgbt", "gay", "lesbienne", "bisexuel", "trans", "sexualité", "aro", "ace", "asexuel");
-        int countSaphirie = countOccurrences(raw, "saphirie", "saphiriq", "saforga", "safŏrga", "safiorga");
-        int countSanslogne = countOccurrences(raw, "sanslogne", "sanslognien", "athena");
-
-        double total = countFinance +
-                countLgbt +
-                countSaphirie +
-                countSanslogne;
-
-        double pFinance = 0.0;
-        double pLgbt = 0.0;
-        double pSaphirie = 0.0;
-        double pSanslogne = 0.0;
-
-        if(total != 0) {
-            pFinance = countFinance / total;
-            pLgbt = countLgbt / total;
-            pSaphirie = countSaphirie / total;
-            pSanslogne = countSanslogne / total;
-        }
-
-        double[] probabilities = {
-                pFinance,
-                pLgbt,
-                pSaphirie,
-                pSanslogne
-        };
-
-        String[] types = {
-                "finance",
-                "lgbt",
-                "saphirie",
-                "sanslogne"
+        int[] counts = {
+                countOccurrences(raw, "thune", "finance", "argent", "monnaie", "money", "$", "€"),
+                countOccurrences(raw, "lgbt", "gay", "lesbienne", "bisexuel", "trans", "sexualité", "aro", "ace", "asexuel"),
+                countOccurrences(raw, "saphirie", "saphiriq", "saforga", "safŏrga", "safiorga"),
+                countOccurrences(raw, "sanslogne", "sanslognien", "athena"),
         };
         // END ALGORITHM SELECTION MODEL
 
+        double total = Arrays.stream(counts).sum();
+
+        ArrayList<Double> probs = new ArrayList<>();
+
+        for(int i = 0; i < counts.length; i++) {
+            probs.add(counts[i] / total);
+        }
+
+        double[] probabilities = probs.stream().mapToDouble(d -> d).toArray();
+
+        List<String> types = messages.keySet().stream().toList();
+
         for(int i = 0; i < probabilities.length; i++) {
             double prob = probabilities[i];
-            String _t = types[i];
+            String _t = types.get(i);
             Logger.debug(String.format("Probability of message type %s: %f", _t, prob));
         }
 
-        double max = Arrays.stream(probabilities).max().getAsDouble();
+        OptionalDouble optionalMax = Arrays.stream(probabilities).max();
+        double max = 0;
+        if(optionalMax.isPresent()) max = optionalMax.getAsDouble();
         Logger.debug(String.format("Max probability: %f", max));
         if(max != 0) {
             List<Double> list = Arrays.stream(probabilities).boxed().toList();
             int index = list.indexOf(max);
-            if(index != -1) type = types[index];
+            if(index != -1) type = types.get(index);
             Logger.debug(String.format("Index of max probability: %d - Selected type of response: %s", index, type));
         }
 
