@@ -24,6 +24,13 @@ public class MessageReceived extends ListenerAdapter {
         Logger.debug(String.format("Received mention message: %s", raw));
 
         // START ALGORITHM SELECTION MODEL
+        String[] types = {
+                "finance",
+                "lgbt",
+                "saphirie",
+                "sanslogne"
+        };
+
         HashMap<String, String[]> messages = new HashMap<>();
         messages.put("random", new String[]{
                 "Union fédérative de Saphirie-Sanslogne N°1 !!!!!!!! <:union:1268165799328223283> <:union:1268165799328223283>",
@@ -31,17 +38,17 @@ public class MessageReceived extends ListenerAdapter {
                 "# FROM THE SCREEN :tv: TO THE RING :boxing_glove: TO THE PEN :pen: TO THE KING :crown: WASSSSHHHHHHIIIIINNGGGGGGG :crossed_swords:",
                 "Comme KSI* le dit:\n> BUT IM COOOLLLDLDDDDDDLDLDLDL :cold_face: :cold_face:"
         });
-        messages.put("finance", new String[]{
+        messages.put(types[0], new String[]{
                 "Je suis actuellement en train d'étudier comment je pourrais augmenter mon rendement",
                 "Fuck you je te donne pas ma thune",
                 "Calcul des comptes du pays en cours......................\n<:sanslogne:1268165829011439679> Sanslogne: +2%\n<:saphirie:1268165815782608946> Saphirie: -500000%"
         });
-        messages.put("lgbt", new String[]{
+        messages.put(types[1], new String[]{
                 "Si vous avez des questions à propos du fait d'être gay, demandez à <@548922318852849671>",
                 "Il faut comprendre, je ne suis pas homosexuel. Je suis un pays. Je suis un bot. Je ne suis pas un humain.",
                 "Safŏr Dẽfẽ maintenant que le SAM est au pouvoir : :rainbow_flag::x:"
         });
-        messages.put("saphirie", new String[]{
+        messages.put(types[2], new String[]{
                 "Imagine habiter en Saphirie (common saphiriq W)",
                 "Pov la saphirie quand ils ont plus de thune au gouvernement : :speaking_head:",
                 "Pov la saphirie quand ils se rendent compte qu'ils peuvent juste pomper de la thune dans l'industrie : :fire: :fire:",
@@ -49,7 +56,7 @@ public class MessageReceived extends ListenerAdapter {
                 "J'ai juré j'ai jamais vu un jour en saphirie sans qu'il y ait de la propagande électorale",
                 "Les gars on a pas fait Lone pour qu'on se retrouve À NOUVEAU avec des tyrans au pouvoir!"
         });
-        messages.put("sanslogne", new String[]{
+        messages.put(types[3], new String[]{
                 "Imagine habiter en Sanslogne (common sanslogne W)",
                 "Pov la sanslogne après avoir construit une banque : :100: $$$",
                 "Pov la sanslogne quand ils ont du pétrole dans le sol (ils vont plus pouvoir respirer) : :money_mouth:",
@@ -76,11 +83,9 @@ public class MessageReceived extends ListenerAdapter {
 
         double[] probabilities = probs.stream().mapToDouble(d -> d).toArray();
 
-        List<String> types = messages.keySet().stream().toList();
-
         for(int i = 0; i < probabilities.length; i++) {
             double prob = probabilities[i];
-            String _t = types.get(i);
+            String _t = types[i];
             Logger.debug(String.format("[DISCORD] Probability of message type %s: %f", _t.toUpperCase(), prob));
         }
 
@@ -91,7 +96,7 @@ public class MessageReceived extends ListenerAdapter {
         if(max != 0) {
             List<Double> list = Arrays.stream(probabilities).boxed().toList();
             int index = list.indexOf(max);
-            if(index != -1) type = types.get(index);
+            if(index != -1) type = types[index];
             Logger.debug(String.format("[DISCORD] Index of max probability: %d - Selected type of response: %s", index, type.toUpperCase()));
         }
 
