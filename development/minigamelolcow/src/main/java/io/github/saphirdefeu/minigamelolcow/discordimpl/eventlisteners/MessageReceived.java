@@ -1,5 +1,6 @@
 package io.github.saphirdefeu.minigamelolcow.discordimpl.eventlisteners;
 
+import io.github.saphirdefeu.minigamelolcow.Logger;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.DiscordImplementation;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -7,6 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.yaml.snakeyaml.util.ArrayUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MessageReceived extends ListenerAdapter {
 
@@ -18,6 +20,8 @@ public class MessageReceived extends ListenerAdapter {
 
         String type = "random";
         String raw = msg.getContentRaw();
+
+        Logger.debug(String.format("Received mention message: %s", raw));
 
         // START ALGORITHM SELECTION MODEL
         HashMap<String, String[]> messages = new HashMap<>();
@@ -51,15 +55,15 @@ public class MessageReceived extends ListenerAdapter {
         int countSaphirie = countOccurrences(raw, "saphirie", "saphiriq", "saforga", "safŏrga", "safiorga");
         int countSanslogne = countOccurrences(raw, "sanslogne", "sanslognien", "athena");
 
-        int total = countFinance +
+        double total = countFinance +
                 countLgbt +
                 countSaphirie +
                 countSanslogne;
 
-        int pFinance = 0;
-        int pLgbt = 0;
-        int pSaphirie = 0;
-        int pSanslogne = 0;
+        double pFinance = 0.0;
+        double pLgbt = 0.0;
+        double pSaphirie = 0.0;
+        double pSanslogne = 0.0;
 
         if(total != 0) {
             pFinance = countFinance / total;
@@ -68,7 +72,7 @@ public class MessageReceived extends ListenerAdapter {
             pSanslogne = countSanslogne / total;
         }
 
-        int[] probabilities = {
+        double[] probabilities = {
                 pFinance,
                 pLgbt,
                 pSaphirie,
@@ -83,10 +87,19 @@ public class MessageReceived extends ListenerAdapter {
         };
         // END ALGORITHM SELECTION MODEL
 
-        int max = Arrays.stream(probabilities).max().getAsInt();
+        for(int i = 0; i < probabilities.length; i++) {
+            double prob = probabilities[i];
+            String _t = types[i];
+            Logger.debug(String.format("Probability of message type %s: %f", _t, prob));
+        }
+
+        double max = Arrays.stream(probabilities).max().getAsDouble();
+        Logger.debug(String.format("Max probability: %f", max));
         if(max != 0) {
-            int index = Arrays.asList(probabilities).indexOf(max);
-            type = types[index];
+            List<Double> list = Arrays.stream(probabilities).boxed().toList();
+            int index = list.indexOf(max);
+            if(index != -1) type = types[index];
+            Logger.debug(String.format("Index of max probability: %d - Selected type of response: %s", index, type));
         }
 
         Random rng = new Random();
@@ -101,12 +114,16 @@ public class MessageReceived extends ListenerAdapter {
             return 0;
         }
 
+        origin = origin.toLowerCase();
+
         int totalCount = 0;
 
         for (String word : words) {
             if (word == null || word.isEmpty()) {
                 continue;
             }
+
+            word = word.toLowerCase();
 
             int index = 0;
             while ((index = origin.indexOf(word, index)) != -1) {
