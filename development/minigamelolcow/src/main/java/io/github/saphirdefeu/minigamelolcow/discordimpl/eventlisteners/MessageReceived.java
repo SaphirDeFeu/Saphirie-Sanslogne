@@ -4,9 +4,9 @@ import io.github.saphirdefeu.minigamelolcow.discordimpl.DiscordImplementation;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.yaml.snakeyaml.util.ArrayUtils;
 
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class MessageReceived extends ListenerAdapter {
 
@@ -19,6 +19,7 @@ public class MessageReceived extends ListenerAdapter {
         String type = "random";
         String raw = msg.getContentRaw();
 
+        // START ALGORITHM SELECTION MODEL
         HashMap<String, String[]> messages = new HashMap<>();
         messages.put("random", new String[]{
                 "Union fédérative de Saphirie-Sanslogne N°1 !!!!!!!! <:union:1268165799328223283> <:union:1268165799328223283>",
@@ -45,29 +46,75 @@ public class MessageReceived extends ListenerAdapter {
                 "Je propose Libération au n°14"
         });
 
-        String type = "random";
-        String raw = msg.getContentRaw();
-        if(containsWords(raw, "thune", "finance", "argent", "monnaie", "money", "$", "€"))
-            type = "finance";
-        else if(containsWords(raw, "lgbt", "gay", "lesbienne", "bisexuel", "trans", "sexualité", "aro", "ace", "asexuel"))
-            type = "lgbt";
-        else if(containsWords(raw, "saphirie", "saphiriq", "saforga", "safŏrga", "safiorga"))
-            type = "saphirie";
-        else if(containsWords(raw, "sanslogne", "sanslognien", "athena"))
-            type = "sanslogne";
+        int countFinance = countOccurrences(raw, "thune", "finance", "argent", "monnaie", "money", "$", "€");
+        int countLgbt = countOccurrences(raw, "lgbt", "gay", "lesbienne", "bisexuel", "trans", "sexualité", "aro", "ace", "asexuel");
+        int countSaphirie = countOccurrences(raw, "saphirie", "saphiriq", "saforga", "safŏrga", "safiorga");
+        int countSanslogne = countOccurrences(raw, "sanslogne", "sanslognien", "athena");
 
+        int total = countFinance +
+                countLgbt +
+                countSaphirie +
+                countSanslogne;
+
+        int pFinance = 0;
+        int pLgbt = 0;
+        int pSaphirie = 0;
+        int pSanslogne = 0;
+
+        if(total != 0) {
+            pFinance = countFinance / total;
+            pLgbt = countLgbt / total;
+            pSaphirie = countSaphirie / total;
+            pSanslogne = countSanslogne / total;
+        }
+
+        int[] probabilities = {
+                pFinance,
+                pLgbt,
+                pSaphirie,
+                pSanslogne
+        };
+
+        String[] types = {
+                "finance",
+                "lgbt",
+                "saphirie",
+                "sanslogne"
+        };
+        // END ALGORITHM SELECTION MODEL
+
+        int max = Arrays.stream(probabilities).max().getAsInt();
+        if(max != 0) {
+            int index = Arrays.asList(probabilities).indexOf(max);
+            type = types[index];
+        }
 
         Random rng = new Random();
-        int max = messages.get(type).length;
-        int num = rng.nextInt(max);
+        int SIZE = messages.get(type).length;
+        int num = rng.nextInt(SIZE);
         String select = messages.get(type)[num];
         msg.reply(select).queue();
     }
 
-    boolean containsWords(String raw, String... words) {
-        for(String word : words) {
-            if(raw.toLowerCase().contains(word.toLowerCase())) return true;
+    private int countOccurrences(String origin, String... words) {
+        if (origin == null || words == null || words.length == 0) {
+            return 0;
         }
-        return false;
+
+        int totalCount = 0;
+
+        for (String word : words) {
+            if (word == null || word.isEmpty()) {
+                continue;
+            }
+
+            int index = 0;
+            while ((index = origin.indexOf(word, index)) != -1) {
+                totalCount++;
+                index += word.length();
+            }
+        }
+
+        return totalCount;
     }
 }
