@@ -1,8 +1,8 @@
 <template>
   <header>
-    <RouterLink to="/">National</RouterLink><br/>
-    <RouterLink to="/saphirie">Saphirie</RouterLink><br/>
-    <RouterLink to="/sanslogne">Sanslogne</RouterLink>
+    <RouterLink to="/"><img src="https://github.com/SaphirDeFeu/Saphirie-Sanslogne/blob/main/Union.png?raw=true"></RouterLink>
+    <RouterLink to="/saphirie"><img src="https://github.com/SaphirDeFeu/Saphirie-Sanslogne/blob/main/Saphirie.png?raw=true"></RouterLink>
+    <RouterLink to="/sanslogne"><img src="https://github.com/SaphirDeFeu/Saphirie-Sanslogne/blob/main/Sanslogne.png?raw=true"></RouterLink>
   </header>
   <main>
     <RouterView />
@@ -21,7 +21,17 @@ header {
   border: none;
   height: 10vh;
   width: 100vw;
+  display: fixed;
+  flex-direction: row;
   background-color: #dddddd;
+}
+
+header img {
+  margin-right: 5vw;
+  height: 10vh;
+  aspect-ratio: inherit;
+  border: 1px solid red;
+  border-radius: 4px;
 }
 
 main {

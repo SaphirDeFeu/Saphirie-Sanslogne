@@ -18,6 +18,7 @@
         <button id="for" :active="party.vote == 0" @click="set_vote(party.name, 0)">Pour</button>
         <button id="against" :active="party.vote == 1" @click="set_vote(party.name, 1)">Contre</button>
         <button id="none" :active="party.vote == 2" @click="set_vote(party.name, 2)">Abstention</button>
+        <input type="number" min="0" max="132" :value="party.seats" @input="event => redis_seats(party, event.target.value)"/>
       </div>
     </div>
   </div>
@@ -49,6 +50,28 @@ const TOTAL_TOTAL = 76;
 
 const yes = ref("Indécision");
 const color = ref("grey");
+
+function redis_seats(party, seat) {
+  party.seats = parseInt(seat);
+  let tmp = 0;
+  for(const party of parties.value) {
+    console.log(party);
+    tmp += party.seats;
+    console.log(tmp);
+  }
+
+  console.log(tmp);
+
+  if(tmp != TOTAL_TOTAL) {
+    yes.value = "ERREUR - SIEGES MANQUANTS OU EN TROP! (" + (TOTAL_TOTAL - tmp) + " sièges manquants)";
+    color.value = "#990000";
+    allow_change.value = false;
+  } else {
+    yes.value = "...";
+    color.value = "#dddddd";
+    allow_change.value = true;
+  }
+}
 
 function set_vote(party_name: string, vote: number) {
   console.log("call with", party_name, vote)
@@ -155,7 +178,7 @@ div#bar div#none {
 
 div#party-selection div {
   display: flex;
-  width: 30vw;
+  width: 40vw;
   margin-top: 0.5rem;
 }
 
@@ -192,11 +215,13 @@ div#party-selection div div#buttons button#for {
   border-radius: 8px 0px 0px 8px;
 }
 
-/* div#party-selection div div#buttons button#against {
-  background-color: red;
-} */
-
 div#party-selection div div#buttons button#none {
   border-radius: 0px 8px 8px 0px;
+}
+
+div#party-selection div div#buttons input {
+  margin-left: 1vw;
+  border-radius: 8px;
+  text-align: center;
 }
 </style>
