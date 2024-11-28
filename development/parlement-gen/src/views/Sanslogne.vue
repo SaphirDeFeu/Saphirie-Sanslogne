@@ -50,7 +50,9 @@ const TOTAL_TOTAL = 62;
 const yes = ref("Indécision");
 const color = ref("grey");
 
-function redis_seats(party, seat) {
+const allow_change = ref(true);
+
+function redis_seats(party: {name: string, seats: number, vote: number}, seat: string) {
   party.seats = parseInt(seat);
   let tmp = 0;
   for(const party of parties.value) {
@@ -109,7 +111,7 @@ function calculate() {
   for_width.value = for_total.value / total.value * 100;
   against_width.value = against_total.value / total.value * 100;
 
-  if(none_total.value == total.value == TOTAL_TOTAL) {
+  if(none_total.value == TOTAL_TOTAL) {
     none_width.value = 100;
     yes.value = "Indécision";
     color.value = "grey";
