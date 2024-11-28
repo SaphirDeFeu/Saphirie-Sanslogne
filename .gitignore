@@ -29,3 +29,6 @@ development/*/.idea
 development/*/build
 development/*/gradle
 development/*/run
+
+development/*/node_modules
+development/*/.vscode
