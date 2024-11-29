@@ -18,7 +18,7 @@
         <button id="for" :active="party.vote == 0" @click="set_vote(party.name, 0)">Pour</button>
         <button id="against" :active="party.vote == 1" @click="set_vote(party.name, 1)">Contre</button>
         <button id="none" :active="party.vote == 2" @click="set_vote(party.name, 2)">Abstention</button>
-        <input type="number" min="0" max="132" :value="party.seats" @input="event => redis_seats(party, event.target.value)"/>
+        <input type="number" min="0" max="132" :value="party.seats" @input="event => redis_seats(party, (event.target ?? {value:0}).value)"/>
       </div>
     </div>
   </div>
@@ -187,8 +187,8 @@ div#bar div#none {
 
 div#party-selection div {
   display: flex;
-  width: 40vw;
-  margin-top: 0.5rem;
+  width: 50vw;
+  margin-top: 1vh;
 }
 
 div#party-selection div div#buttons {

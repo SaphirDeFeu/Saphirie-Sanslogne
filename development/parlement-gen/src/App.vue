@@ -14,6 +14,10 @@ import { RouterView } from 'vue-router'
 </script>
 
 <style scoped>
+* {
+  font-family: sans-serif;
+}
+
 header {
   position: fixed;
   margin: 0;
@@ -37,8 +41,10 @@ header img {
 main {
   margin: 0;
   padding: 0;
+  position: absolute;
+  top: 12vh;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 12vh);
   display: flex;
   flex-direction: column;
   align-items: center;

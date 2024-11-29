@@ -179,8 +179,8 @@ div#bar div#none {
 
 div#party-selection div {
   display: flex;
-  width: 40vw;
-  margin-top: 0.5rem;
+  width: 50vw;
+  margin-top: 1vh;
 }
 
 div#party-selection div div#buttons {
