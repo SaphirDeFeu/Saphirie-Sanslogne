@@ -15,7 +15,7 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
 * {
-  font-family: sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 header {

@@ -1,24 +1,26 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/require-v-for-key -->
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <template>
   <div id="bar">
     <div id="for"></div>
     <div id="against"></div>
-    <div id="none"></div>
   </div>
 
   <div id="count">
-    <span id="for">{{ for_total }}</span>/<span id="total">{{ total }}</span> (<span id="abs">{{ none_total }}</span> abstentions) -> <span id="approved">{{ yes }}</span>
+    <span>
+      <span id="for">{{ for_total }}</span>/<span id="total">{{ total }}</span> (<span id="abs">{{ none_total }}</span> abstentions) -> <span id="approved">{{ yes }}</span>
+    </span>
   </div>
 
-  <div id="party-selection" v-for="party of parties">
+  <div id="party-selection" v-for="party of parties" :style="'border-bottom: 4px solid ' + party.color">
     <div>
       <div id="name">{{ party.name }}</div>
       <div id="buttons">
         <button id="for" :active="party.vote == 0" @click="set_vote(party.name, 0)">Pour</button>
         <button id="against" :active="party.vote == 1" @click="set_vote(party.name, 1)">Contre</button>
         <button id="none" :active="party.vote == 2" @click="set_vote(party.name, 2)">Abstention</button>
-        <input type="number" min="0" max="132" :value="party.seats" @input="event => redis_seats(party, event.target.value)"/>
+        <input type="number" min="0" max="132" :value="party.seats" @input="event => redis_seats(party, (event.target ?? {value:0}).value)"/>
       </div>
     </div>
   </div>
@@ -28,12 +30,12 @@
 import { ref } from 'vue';
 
 const parties = ref([
-  {'name':"Labor",'seats':7,vote:2},
-  {'name':"SSP",'seats':26,vote:2},
-  {'name':"INP",'seats':0,vote:2},
-  {'name':"SAM",'seats':32,vote:2},
-  {'name':"Républicains",'seats':10,vote:2},
-  {'name':"PHNG",'seats':1,vote:2},
+  {'name':"Labor",'seats':7,vote:2,color:'#670000'},
+  {'name':"SSP",'seats':26,vote:2,color:'#ff0000'},
+  {'name':"INP",'seats':0,vote:2,color:'#00ffff'},
+  {'name':"SAM",'seats':32,vote:2,color:'#ff7000'},
+  {'name':"Républicains",'seats':10,vote:2,color:'#0026ff'},
+  {'name':"PHNG",'seats':1,vote:2,color:'#b200ff'},
 ]);
 
 const for_width = ref(0);
@@ -133,7 +135,14 @@ function calculate() {
 </script>
 
 <style scoped>
-/** for total abs approved */
+div#count > * {
+  font-size: 110%;
+}
+
+div#count > * * {
+  font-size: 150%;
+}
+
 div#count span#for {
   color: #00dd00;
 }
@@ -150,11 +159,12 @@ div#bar {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 10vh;
   width: 50vw;
   margin-bottom: 2rem;
   background-color: #dddd00;
+  border-radius: 8px;
 }
 
 div#bar div#for {
@@ -162,6 +172,7 @@ div#bar div#for {
   width: calc(v-bind("for_width + 'vw'") / 2);
   height: inherit;
   background-color: #00dd00;
+  transition: width 1s ease-in-out;
 }
 
 div#bar div#against {
@@ -169,13 +180,7 @@ div#bar div#against {
   width: calc(v-bind("against_width + 'vw'") / 2);
   height: inherit;
   background-color: #dd0000;
-}
-
-div#bar div#none {
-  position: inherit;
-  width: calc(v-bind("none_width + 'vw'") / 2);
-  height: inherit;
-  background-color: #dddd00;
+  transition: width 1s ease-in-out;
 }
 
 div#party-selection div {
@@ -191,6 +196,10 @@ div#party-selection div div#buttons {
 div#party-selection div div#buttons button {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
+  margin: .3vh 0;
+  margin-left: 1px;
+  border: none;
+  background-color: #dddddd;
 }
 
 div#party-selection div div#buttons button[active=false] {
@@ -199,6 +208,7 @@ div#party-selection div div#buttons button[active=false] {
 
 div#party-selection div div#name {
   justify-content: flex-start;
+  font-size: 150%;
 }
 
 div#party-selection div div#buttons button#for[active=true] {
@@ -222,8 +232,17 @@ div#party-selection div div#buttons button#none {
 }
 
 div#party-selection div div#buttons input {
-  margin-left: 1vw;
+  margin: .3vh 0;
+  margin-left: .5vw;
   border-radius: 8px;
   text-align: center;
+  background-color: #f0f0f0;
+  border: 1px solid white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+div#party-selection div div#buttons input:focus {
+  outline-width: 0;
 }
 </style>
