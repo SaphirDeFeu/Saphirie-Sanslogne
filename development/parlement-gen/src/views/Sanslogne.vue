@@ -110,6 +110,8 @@ function calculate() {
     }
   }
 
+  if(total.value == 0) total.value = TOTAL_TOTAL;
+
   for_width.value = for_total.value / total.value * 100;
   against_width.value = against_total.value / total.value * 100;
 
