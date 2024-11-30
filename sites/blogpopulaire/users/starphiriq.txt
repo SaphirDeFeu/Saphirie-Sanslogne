@@ -4,7 +4,7 @@ Nom/Prénom : DẼILIÇ Sofă
 Nationalité : Safirico-Sanslognien (Saphiriq)
 Date/Lieu de naissance : 9 mai -21 (26 ans) / Camp saphiriq d'exilés
 Emploi actuel : LA POSTE municipale Saphiriq, Ckulsol
-Orientation et Identité : Femme cisgenre, hétérosexuel
+Orientation et Identité : Femme cisgenre, hétérosexuelle
 
 
 # ÉDUCATION :
@@ -21,3 +21,5 @@ Législatives    : INP
 AN 5
 Présidentielles : INP | SSP
 Législatives    : Républicains
+
+AN 5 (juillet)  : SAM

@@ -13,7 +13,7 @@ Aucune éducation par moyens officiels.
 
 
 # AGENDA POLITIQUE :
-Communiste : Axes SEC : Libertaire - Socialisme, Communisme - Progressivisme
+Communiste : Axes SEC : Libertaire - Communisme - Progressivisme
 AN 4
 Présidentielles : Labor | SSP
 Législatives    : Labor
@@ -21,3 +21,5 @@ Législatives    : Labor
 AN 5
 Présidentielles : Labor | SSP
 Législatives    : SSP
+
+AN 5 (juillet)  : Labor
