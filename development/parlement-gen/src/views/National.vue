@@ -2,9 +2,15 @@
 <!-- eslint-disable vue/require-v-for-key -->
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <template>
-  <div id="bar">
-    <div id="for"></div>
-    <div id="against"></div>
+  <div id="overbar">
+    <!-- <div id="text">50%<br/>\/</div> -->
+    <div id="superposition">
+      <div id="bar">
+        <div id="for"></div>
+        <div id="against"></div>
+      </div>    
+      <div id="separator"></div>
+    </div>
   </div>
 
   <div id="count">
@@ -133,9 +139,6 @@ function calculate() {
   if(for_total.value > total.value / 2) {
     yes.value = "Approuvé";
     color.value = "#00dd00";
-  } else if(for_total.value == total.value / 2) {
-    yes.value = "Indécision";
-    color.value = "grey";
   } else {
     yes.value = "Rejeté";
     color.value = "#dd0000";
@@ -144,6 +147,50 @@ function calculate() {
 </script>
 
 <style scoped>
+div#overbar {  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div#overbar #text {
+  font-size: 120%;
+  text-align: center;
+  margin: none;
+  padding: none;
+}
+
+div#superposition {
+  position: relative;
+  width: 50vw;
+  height: 10vh;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+
+}
+
+div#superposition div#bar {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background-color: #dddd00;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div#superposition div#separator {
+  z-index: 1;
+  position: absolute;
+  height: inherit;
+  width: 1px;
+  top: 0;
+  left: calc(50vw / 2 - 1px);
+  background-color: white;
+}
+
 div#count > * {
   font-size: 110%;
 }
@@ -162,18 +209,6 @@ div#count span#abs {
 
 div#count span#approved {
   color: v-bind("color");
-}
-
-div#bar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: 10vh;
-  width: 50vw;
-  margin-bottom: 2rem;
-  background-color: #dddd00;
-  border-radius: 8px;
 }
 
 div#bar div#for {

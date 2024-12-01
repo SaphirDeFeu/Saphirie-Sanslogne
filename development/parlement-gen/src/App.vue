@@ -19,11 +19,13 @@ import { RouterView } from 'vue-router'
 }
 
 header {
+  z-index: 100;
+
   position: fixed;
   margin: 0;
   padding: 0;
   border: none;
-  height: 10vh;
+  height: 6vh;
   width: 100vw;
   display: fixed;
   flex-direction: row;
@@ -32,7 +34,7 @@ header {
 
 header img {
   margin-right: 5vw;
-  height: 10vh;
+  height: 6vh;
   aspect-ratio: inherit;
   border: 1px solid red;
   border-radius: 4px;
@@ -42,9 +44,8 @@ main {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 12vh;
+  top: 8vh;
   width: 100vw;
-  height: calc(100vh - 12vh);
   display: flex;
   flex-direction: column;
   align-items: center;
