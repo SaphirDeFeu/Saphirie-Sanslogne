@@ -212,7 +212,6 @@ div#count span#approved {
 }
 
 div#bar div#for {
-  position: inherit;
   width: calc(v-bind("for_width + 'vw'") / 2);
   height: inherit;
   background-color: #00dd00;
@@ -220,7 +219,6 @@ div#bar div#for {
 }
 
 div#bar div#against {
-  position: inherit;
   width: calc(v-bind("against_width + 'vw'") / 2);
   height: inherit;
   background-color: #dd0000;

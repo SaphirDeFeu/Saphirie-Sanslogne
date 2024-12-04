@@ -20,8 +20,8 @@ import { RouterView } from 'vue-router'
 
 header {
   z-index: 100;
-
-  position: fixed;
+  top: 0;
+  left: 0;
   margin: 0;
   padding: 0;
   border: none;
