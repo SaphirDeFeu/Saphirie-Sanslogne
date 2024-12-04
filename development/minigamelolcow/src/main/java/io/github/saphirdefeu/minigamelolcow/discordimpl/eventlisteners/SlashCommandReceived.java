@@ -5,6 +5,8 @@ import io.github.saphirdefeu.minigamelolcow.discordimpl.Landmark;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -33,7 +35,33 @@ public class SlashCommandReceived extends ListenerAdapter {
                 timeCommand(event);
                 break;
             }
+            case "cmd": {
+                runCommandServer(event);
+            }
         }
+    }
+
+    public static void runCommandServer(@NotNull SlashCommandInteractionEvent event) {
+        event.deferReply().queue();
+        OptionMapping cmdMapping = event.getOption("command");
+        if(cmdMapping == null) {
+            event.getHook().sendMessage("'command' n'est pas un paramètre optionnel.").queue();
+            return;
+        }
+
+        String cmd = cmdMapping.getAsString();
+
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            Component message = Component.text("[MINIGAMELOLCOW] ").color(NamedTextColor.RED)
+                            .append(Component.text("Running ").color(NamedTextColor.WHITE))
+                            .append(Component.text(
+                                        String.format("%s", cmd)
+                                    ).color(NamedTextColor.YELLOW)
+                            );
+            Bukkit.broadcast(message);
+            event.getHook().sendMessage(String.format("Command `%s` ran", cmd)).queue();
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+        });
     }
 
     public static void playerPosCommand(@NotNull SlashCommandInteractionEvent event) {

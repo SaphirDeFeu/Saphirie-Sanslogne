@@ -42,7 +42,9 @@ public final class DiscordImplementation {
             jda.updateCommands().addCommands(
                     Commands.slash("playerpos", "Récupères la position d'un joueur avec une approximation du lieu dans lequel il est")
                             .addOption(OptionType.STRING, "player", "Le nom du joueur"),
-                    Commands.slash("time", "Récupères le temps actuel sur le serveur")
+                    Commands.slash("time", "Récupères le temps actuel sur le serveur"),
+                    Commands.slash("cmd", "Exécutes une commande sur le serveur")
+                            .addOption(OptionType.STRING, "command", "La commande à exécuter")
             ).queue();
 
             try {
