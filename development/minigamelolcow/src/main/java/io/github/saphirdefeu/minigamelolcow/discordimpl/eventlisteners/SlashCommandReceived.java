@@ -49,6 +49,17 @@ public class SlashCommandReceived extends ListenerAdapter {
             return;
         }
 
+        if(!event.getUser().getName().equals("saphirdefeu") &&
+                !event.getUser().getName().equals("middleschool")) {
+            // Small security check to verify that not everyone is sending commands to the server
+            event.getHook().sendMessage(
+                    String.format("Shut the fuck up, **%s**",
+                            event.getUser().getName()
+                    )
+            ).queue();
+            return;
+        }
+
         String cmd = cmdMapping.getAsString();
 
         Bukkit.getScheduler().runTask(plugin, () -> {
