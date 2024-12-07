@@ -24,24 +24,21 @@ header {
   left: 0;
   margin: 1vh;
   border: none;
-  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
 }
 
 header a {
-  margin-top: 1vw;
+  margin-left: 1vw;
   z-index: 101;
-  top: 0;
-  left: 0;
-  padding: 10px;
-  width: 15vw;
+  padding-bottom: 11px;
+  height: 6vh;
   border-radius: 4px;
 }
 
 header img {
-  width: 12vw;
-  padding: 2px;
+  height: 6vh;
+  padding: 1px;
   aspect-ratio: inherit;
   border-radius: 4px;
 
@@ -73,13 +70,13 @@ main {
 
 @keyframes select-route {
   0% {
-    width: 12vw;
+    height: 6vh;
     padding: 2px;
     background: blue;
   }
 
   100% {
-    width: calc(12vw * 1.1);
+    height: calc(6vh * 1.1);
     padding: calc(2px * 1.1);
     background: red;
   }
@@ -87,13 +84,13 @@ main {
 
 @keyframes select-route-inverse {
   0% {
-    width: calc(12vw * 1.1);
+    height: calc(6vh * 1.1);
     padding: calc(2px * 1.1);
     background: red;
   }
 
   100% {
-    width: 12vw;
+    height: 6vh;
     padding: 2px;
     background: blue;
   }

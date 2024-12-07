@@ -15,11 +15,15 @@
 
   <div id="count">
     <span>
-      <span id="for">{{ for_total }}</span>/<span id="total">{{ total }}</span> (<span id="abs">{{ none_total }}</span> abstentions) -> <span id="approved">{{ yes }}</span>
+      <span id="for">{{ for_total }}</span>/
+      <span id="total">{{ total }}</span> (
+        <span id="abs">{{ none_total }}</span> abstentions) -> 
+        <span id="approved">{{ yes }}</span> / 
+        <span id="two-thirds">2/3</span>
     </span>
   </div>
 
-  <div id="party-selection" v-for="party of parties" :style="'border-bottom: 4px solid ' + party.color">
+  <div id="party-selection" v-for="party of parties">
     <div>
       <div id="name">{{ party.name }}</div>
       <div id="buttons">
@@ -29,6 +33,7 @@
         <input type="number" min="0" max="132" :value="party.seats" @input="event => redis_seats(party, (event.target ?? {value:0}).value)"/>
       </div>
     </div>
+    <div :style="'width: inherit; height: 0; margin: 0; padding: 0; border-bottom: 4px solid ' + party.color + '; filter: brightness(90%);'"></div>
   </div>
 </template>
 
@@ -62,6 +67,7 @@ const none_total = ref(TOTAL_TOTAL);
 const total = ref(TOTAL_TOTAL);
 
 const yes = ref("Indécision");
+const two_thirds = ref("#dd0000");
 const color = ref("grey");
 
 const allow_change = ref(true);
@@ -143,6 +149,12 @@ function calculate() {
     yes.value = "Rejeté";
     color.value = "#dd0000";
   }
+
+  if(for_total.value >= total.value * 2 / 3) {
+    two_thirds.value = "#00dd00";
+  } else {
+    two_thirds.value = "#dd0000";
+  }
 }
 </script>
 
@@ -209,6 +221,10 @@ div#count span#abs {
 
 div#count span#approved {
   color: v-bind("color");
+}
+
+div#count span#two-thirds {
+  color: v-bind("two_thirds");
 }
 
 div#bar div#for {
