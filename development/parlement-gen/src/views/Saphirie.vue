@@ -43,7 +43,6 @@ import { ref } from 'vue';
 const parties = ref([
   {'name':"Labor",'seats':7,vote:2,color:'#670000'},
   {'name':"SSP",'seats':26,vote:2,color:'#ff0000'},
-  {'name':"INP",'seats':0,vote:2,color:'#00ffff'},
   {'name':"SAM",'seats':32,vote:2,color:'#ff7000'},
   {'name':"Républicains",'seats':10,vote:2,color:'#0026ff'},
   {'name':"PHNG",'seats':1,vote:2,color:'#b200ff'},

@@ -48,7 +48,6 @@ const parties = ref([
   {name:"Démocrates-Théocrates",seats:22,vote:2,color:'#0094ff'},
   {name:"Labor",seats:6,vote:2,color:'#670000'},
   {name:"SSP",seats:23,vote:2,color:'#ff0000'},
-  {name:"INP",seats:0,vote:2,color:'#00ffff'},
   {name:"SAM",seats:27,vote:2,color:'#ff7000'},
   {name:"Républicains",seats:9,vote:2,color:'#0026ff'},
   {name:"PHNG",seats:1,vote:2,color:'#b200ff'},
