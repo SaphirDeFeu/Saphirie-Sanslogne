@@ -80,12 +80,20 @@ public class SlashCommandReceived extends ListenerAdapter {
         OptionMapping playerNameOptionMapping = event.getOption("player");
         if(playerNameOptionMapping == null) return;
 
+        int amount;
+        OptionMapping amountMapping = event.getOption("locations");
+        if(amountMapping != null) amount = amountMapping.getAsInt();
+        else amount = 3;
+
         String playerName = playerNameOptionMapping.getAsString();
 
         Landmark[] landmarks = {
-                new Landmark("ZISO, Ckulsol, Saphirie", -957, -277),
+                new Landmark("Coopérative forestière (ZISO), Ckulsol, Saphirie", -957, -277),
+                new Landmark("Trinŭjuntheim (ZISO), Ckulsol, Saphirie", -684, -340),
+                new Landmark("Usine de manufacture polyvalente (ZISO), Ckulsol, Saphirie", -1230, -340),
                 new Landmark("Centre de la Grande Forêt Occidentale", -1237, 152),
                 new Landmark("Quartier Desperer, Ckulsol, Saphirie", -421, -472),
+                new Landmark("Măl Mundo (Nord), Ckulsol, Saphirie", -310, -833),
                 new Landmark("Banque nationale, Ckulsol, Sanslogne", -77, -554),
                 new Landmark("Quartier résidentiel, Ckulsol, Sanslogne", 249, -379),
                 new Landmark("Assemblée Nationale de l'Union, Ckulsol, Saphirie", -196, -260),
@@ -97,7 +105,8 @@ public class SlashCommandReceived extends ListenerAdapter {
                 new Landmark("Centre-ville, Athena, Sanslogne", 919, -202),
                 new Landmark("Palais d'Athena, Sanslogne", 621, 68),
                 new Landmark("Océan sur les côtés d'Athena, Sanslogne", 982, 54),
-                new Landmark("HouseWants, Ckulsol, Sanslogne", 105, 182)
+                new Landmark("HouseWants, Ckulsol, Sanslogne", 105, 182),
+                new Landmark("Lycée Sainte-Athen, Ckulsol, Sanslogne", -99, 424),
         };
 
         Bukkit.getScheduler().runTask(plugin, () -> {
@@ -134,7 +143,7 @@ public class SlashCommandReceived extends ListenerAdapter {
                     z
             ));
 
-            for(int i = 0; i < 3; i++) {
+            for(int i = 0; i < amount && i < landmarks.length; i++) {
                 int index = indices[i];
 
                 String toAdd = String.format("Le joueur se situe à ~**%d** blocs de **%s**",
