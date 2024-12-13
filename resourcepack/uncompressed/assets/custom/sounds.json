@@ -14,5 +14,8 @@
   },
   "music_disc.audiolog.log_one": {
     "sounds": ["custom:music_disc/audiolog/log1"]
+  },
+  "generic.bell.strike": {
+    "sounds": ["custom:generic/church_bell/strike"]
   }
 }
