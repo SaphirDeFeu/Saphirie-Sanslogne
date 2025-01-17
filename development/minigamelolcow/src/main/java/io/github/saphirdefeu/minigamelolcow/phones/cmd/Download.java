@@ -27,14 +27,15 @@ public class Download implements BasicCommand {
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
-        // 3 args - [owner] [path] [url]
-        if(args.length < 3) {
-            stack.getSender().sendRichMessage("<red>Missing arguments, expected 3 arguments</red>");
+        // 2 args - [owner:path] [url]
+        if(args.length < 2) {
+            stack.getSender().sendRichMessage("<red>Missing arguments, expected 2 arguments</red>");
             return;
         }
 
-        String owner = args[0];
-        String __path = args[1];
+        String[] tmp = args[0].split(":");
+        String owner = tmp[0];
+        String __path = tmp[1];
         String url = args[2];
 
         Path path = Data.resolvePath(owner, __path);

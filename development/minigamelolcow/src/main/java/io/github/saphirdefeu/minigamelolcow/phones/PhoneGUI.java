@@ -76,6 +76,7 @@ public class PhoneGUI implements Listener {
             jythonInterpreter.set("InteractiveHandlers", new InteractiveHandlers(this));
             jythonInterpreter.set("Sounds", new Sounds(this, player));
             jythonInterpreter.set("Server", new Server(player));
+            jythonInterpreter.set("this", new ThisPhone(player, owner));
             this.loadingDone = true;
             for(int i = this.SIZE - 9; i < this.SIZE; i++) {
                 this.inventory.setItem(i, newItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, Component.empty()));
