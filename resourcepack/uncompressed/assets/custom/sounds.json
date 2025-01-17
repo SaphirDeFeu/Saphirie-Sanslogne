@@ -17,5 +17,8 @@
   },
   "generic.bell.strike": {
     "sounds": ["custom:generic/church_bell/strike"]
+  },
+  "stathen.sonnerie": {
+    "sounds": ["custom:sonnerie/sonneriestathen"]
   }
 }
