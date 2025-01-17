@@ -1,0 +1,75 @@
+{
+	"texture": "minecraft:optifine/textures/entity/donkey/motorcycle.png",
+	"textureSize": [128, 128],
+	"credit": "Made with Blockbench",
+	"boxes": [
+		{
+			"coordinates": [-3, -8, -21, 6, 12, 34],
+			"uvNorth": [34, 34, 40, 46],
+			"uvEast": [0, 34, 34, 46],
+			"uvSouth": [74, 34, 80, 46],
+			"uvWest": [40, 34, 74, 46],
+			"uvUp": [40, 34, 34, 0],
+			"uvDown": [46, 0, 40, 34]
+		},
+		{
+			"coordinates": [-4, -9, -8, 8, 2, 8],
+			"uvNorth": [54, 8, 62, 10],
+			"uvEast": [46, 8, 54, 10],
+			"uvSouth": [70, 8, 78, 10],
+			"uvWest": [62, 8, 70, 10],
+			"uvUp": [62, 8, 54, 0],
+			"uvDown": [70, 0, 62, 8]
+		},
+		{
+			"coordinates": [0, -1, -31, 0, 14, 14],
+			"uvNorth": [14, 60, 14, 74],
+			"uvEast": [0, 60, 14, 74],
+			"uvSouth": [28, 60, 28, 74],
+			"uvWest": [14, 60, 28, 74],
+			"uvUp": [14, 60, 14, 46],
+			"uvDown": [14, 46, 14, 60]
+		},
+		{
+			"coordinates": [0, -1, 9, 0, 14, 14],
+			"uvNorth": [14, 46, 14, 60],
+			"uvEast": [0, 46, 14, 60],
+			"uvSouth": [28, 46, 28, 60],
+			"uvWest": [14, 46, 28, 60],
+			"uvUp": [14, 46, 14, 32],
+			"uvDown": [14, 32, 14, 46]
+		}
+	],
+	"submodels": [
+		{
+			"id": "direction",
+			"rotate": [-20, 0, 0],
+			"boxes": [
+				{
+					"coordinates": [-1, -10.81134, -21.44019, 2, 25, 1],
+					"uvNorth": [1, 1, 3, 26],
+					"uvEast": [0, 1, 1, 26],
+					"uvSouth": [4, 1, 6, 26],
+					"uvWest": [3, 1, 4, 26],
+					"uvUp": [3, 1, 1, 0],
+					"uvDown": [5, 0, 3, 1]
+				}
+			]
+		},
+		{
+			"id": "direction2",
+			"rotate": [-20, 0, 0],
+			"boxes": [
+				{
+					"coordinates": [-7, -11.56276, -20.5074, 14, 2, 1],
+					"uvNorth": [1, 29, 15, 31],
+					"uvEast": [0, 29, 1, 31],
+					"uvSouth": [16, 29, 30, 31],
+					"uvWest": [15, 29, 16, 31],
+					"uvUp": [15, 29, 1, 28],
+					"uvDown": [29, 28, 15, 29]
+				}
+			]
+		}
+	]
+}

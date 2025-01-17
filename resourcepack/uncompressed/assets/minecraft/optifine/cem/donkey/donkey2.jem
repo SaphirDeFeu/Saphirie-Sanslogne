@@ -1,0 +1,91 @@
+{
+  "credit": "by SaphirDeFeu",
+  "textureSize": [
+    128,
+    128
+  ],
+  "texture": "minecraft:optifine/textures/entity/donkey/motorcycle.png",
+  "models": [
+    {
+      "part": "body",
+      "id": "body",
+      "model": "donkey2.jpm"
+    },
+    {
+      "part": "neck",
+      "id": "neck"
+    },
+    {
+      "part": "back_left_leg",
+      "id": "back_left_leg"
+    },
+    {
+      "part": "back_right_leg",
+      "id": "back_right_leg"
+    },
+    {
+      "part": "front_left_leg",
+      "id": "front_left_leg"
+    },
+    {
+      "part": "front_right_leg",
+      "id": "front_right_leg"
+    },
+    {
+      "part": "tail",
+      "id": "tail"
+    },
+    {
+      "part": "head",
+      "id": "head"
+    },
+    {
+      "part": "mane",
+      "id": "mane"
+    },
+    {
+      "part": "saddle",
+      "id": "saddle"
+    },
+    {
+      "part": "mouth",
+      "id": "mouth"
+    },
+    {
+      "part": "left_ear",
+      "id": "left_ear"
+    },
+    {
+      "part": "right_ear",
+      "id": "right_ear"
+    },
+    {
+      "part": "left_ear",
+      "id": "left_ear"
+    },
+    {
+      "part": "left_bit",
+      "id": "left_bit"
+    },
+    {
+      "part": "right_bit",
+      "id": "right_bit"
+    },
+    {
+      "part": "left_rein",
+      "id": "left_rein"
+    },
+    {
+      "part": "right_rein",
+      "id": "right_rein"
+    },
+    {
+      "part": "noseband",
+      "id": "noseband"
+    },
+    {
+      "part": "headpiece",
+      "id": "headpiece"
+    }
+  ]
+}

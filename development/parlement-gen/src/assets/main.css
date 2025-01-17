@@ -1,0 +1,9 @@
+* {
+  overflow: hidden;
+}
+
+html, body, div#app, main {
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+}
