@@ -7,6 +7,9 @@ addons:
     enabled: false # Experimental feature, enable at your own risk
   phones:
     enabled: false # Experimental feature, enable at your own risk
+  fixes:
+    enabled: false
+    fix_spawnpoint_multiverse: true # Renders /spawnpoint usable again under multiverse
   listeners:
     enabled: true
   discord:

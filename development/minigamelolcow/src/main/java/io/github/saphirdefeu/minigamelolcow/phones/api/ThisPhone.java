@@ -18,8 +18,4 @@ public class ThisPhone {
             return player.getLocation();
         }
     }
-
-    public class Data {
-        
-    }
 }
