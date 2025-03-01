@@ -84,10 +84,6 @@ public final class Main extends JavaPlugin {
             }
         }
 
-        if(config.getBoolean("addons.fixes.enabled")) {
-            Logger.debug("Enabling fixes addon");
-        }
-
         if(config.getBoolean("addons.listeners.enabled")) {
             Logger.debug("Registering global events");
             PluginManager pluginManager = this.getServer().getPluginManager();
