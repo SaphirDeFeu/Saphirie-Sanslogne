@@ -15,6 +15,9 @@
   "music_disc.audiolog.log_one": {
     "sounds": ["custom:music_disc/audiolog/log1"]
   },
+  "music_disc.anthem.saphirie": {
+    "sounds": ["custom:music_disc/anthem/saphirie"]
+  },
   "generic.bell.strike": {
     "sounds": ["custom:generic/church_bell/strike"]
   },
