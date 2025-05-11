@@ -16,10 +16,19 @@ function CH_V(ex, choice) {
     "hidden",
   );
   elem.querySelector("div.question").classList.add("hidden");
+}
 
-  const windowYSize = window.innerHeight;
-  window.scrollBy({
-    top: windowYSize,
+document.addEventListener("DOMContentLoaded", () => {
+  window.scrollTo({
+    top: 0,
     behavior: "smooth",
   });
-}
+});
+
+/*
+const windowYSize = window.innerHeight;
+window.scrollBy({
+  top: windowYSize,
+  behavior: "smooth",
+});
+*/
