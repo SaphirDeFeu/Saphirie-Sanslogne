@@ -1,0 +1,57 @@
+/* CSS file used for HOME pages (exercises/home & lessons/home) */
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  background-color: black;
+}
+
+* {
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+}
+
+body > div {
+  top: 10vh;
+
+  width: 80vw;
+  min-height: 80vh;
+
+  display: grid;
+
+  column-gap: 20px;
+  row-gap: 20px;
+
+  /* cursed expression */
+  grid-template-columns: repeat(6, calc(calc(80vw - calc(6 * 20px)) / 6));
+}
+
+a > p {
+  padding: 0;
+  margin: 0;
+
+
+}
+
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-size: 120%;
+
+  background-color: green;
+  padding: 0.8%;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

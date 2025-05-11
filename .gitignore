@@ -18,6 +18,7 @@ sftp-access/
 
 target/
 .vscode/
+package-lock.json
 
 # as such, we can have a private folder for private usage for each user (like spoilers and shit)
 private/
