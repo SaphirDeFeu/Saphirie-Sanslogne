@@ -18,7 +18,7 @@ function CH_V(ex, choice) {
   elem.querySelector("div.question").classList.add("hidden");
 
   const windowYSize = window.innerHeight;
-  window.scroll({
+  window.scrollBy({
     top: windowYSize,
     behavior: "smooth",
   });

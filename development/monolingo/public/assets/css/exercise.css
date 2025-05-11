@@ -69,3 +69,7 @@ div.exercise > div.multiple > button {
 div.exercise > div.title > div.hidden {
   font-size: 0;
 }
+
+audio {
+  width: 80%;
+}

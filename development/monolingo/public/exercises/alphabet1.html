@@ -29,16 +29,63 @@
 
   <div class="exercise" id="2">
     <div class="title">
-      <div class="question">Combien de lettres y a-t-il dans l'alphabet saphiriq?</div>
-      <div class="explain hidden">L'alphabet saphiriq utilise l'alphabet latin entier à l'exception de la lettre Q. À la
-        place, on y rajoute le Ç qui donne un compte total de 26 lettres.</div>
+      <div class="question">Quels sons peuvent être produits par la lettre B ?</div>
+      <div class="explain hidden">Le B saphiriq peut se prononcer soit /b/ comme en saphiriq moderne ou safiorga, ou /β/
+        comme certains saphiriqs modernes.</div>
     </div>
     <div class="multiple">
 
-      <button onclick='CH_X("2", 0)'>10</button>
-      <button onclick='CH_V("2", 1)'>26</button>
-      <button onclick='CH_X("2", 2)'>25</button>
-      <button onclick='CH_X("2", 3)'>33</button>
+      <button onclick='CH_V("2", 0)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Voiced_bilabial_plosive.ogg"
+            type="audio/ogg">
+          /b/
+        </audio></button>
+      <button onclick='CH_V("2", 1)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/3/37/Voiced_bilabial_fricative.ogg"
+            type="audio/ogg">
+          /β/
+        </audio></button>
+      <button onclick='CH_X("2", 2)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/9/97/Voiceless_palato-alveolar_affricate.ogg"
+            type="audio/ogg">
+          /t̠ʃ/
+        </audio></button>
+      <button onclick='CH_X("2", 3)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Bilabial_trill.ogg" type="audio/ogg">
+          /ʙ/
+        </audio></button>
+
+    </div>
+  </div>
+
+  <div class="exercise" id="3">
+    <div class="title">
+      <div class="question">Quels sons sont présents dans l'inventaire phonémique saphiriq?</div>
+      <div class="explain hidden">Le son /s/ est représenté par la lettre S. Le son /ʀ/ lui est représenté par le
+        digraphe RH et est proche du R français. Les sons /ɬ/ et /r/ ne sont pas présents. /r/, même si proche de /ʀ/,
+        est le R espagnol et ce ne sont pas les mêmes phonèmes.</div>
+    </div>
+    <div class="multiple">
+
+      <button onclick='CH_V("3", 0)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Voiceless_alveolar_sibilant.ogg"
+            type="audio/ogg">
+          /s/
+        </audio></button>
+      <button onclick='CH_V("3", 1)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Uvular_trill.ogg" type="audio/ogg">
+          /ʀ/
+        </audio></button>
+      <button onclick='CH_X("3", 2)'><audio controls>
+          <source
+            src="https://upload.wikimedia.org/wikipedia/commons/transcoded/e/ea/Voiceless_alveolar_lateral_fricative.ogg/Voiceless_alveolar_lateral_fricative.ogg.mp3"
+            type="audio/ogg">
+          /ɬ/
+        </audio></button>
+      <button onclick='CH_X("3", 3)'><audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Alveolar_trill.ogg" type="audio/ogg">
+          /r/
+        </audio></button>
 
     </div>
   </div>
