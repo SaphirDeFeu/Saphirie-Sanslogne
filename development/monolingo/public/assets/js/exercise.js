@@ -18,6 +18,28 @@ function CH_V(ex, choice) {
   elem.querySelector("div.question").classList.add("hidden");
 }
 
+function CHECK(ex) {
+  const elem = document.getElementById(ex);
+  const explain = elem.querySelector("div.explain");
+
+  const input = elem.querySelector("input");
+  const possibilities = explain.textContent.toLowerCase().split("/");
+
+  if (possibilities.includes(input.value.toLowerCase())) {
+    input.setAttribute("style", "border: 2px solid green");
+
+    const windowYSize = window.innerHeight;
+    window.scrollBy({
+      top: windowYSize,
+      behavior: "smooth",
+    });
+  } else {
+    input.setAttribute("style", "border: 2px solid red");
+  }
+
+  explain.classList.remove("hidden");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   window.scrollTo({
     top: 0,

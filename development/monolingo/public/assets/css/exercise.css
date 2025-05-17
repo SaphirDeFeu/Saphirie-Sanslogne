@@ -60,8 +60,8 @@ div.exercise > div.multiple {
 }
 
 div.exercise > div.multiple > button {
-  width: 15em;
-  height: 5em;
+  width: 14vw;
+  height: 80%;
   color: white;
   background: black;
   border: 1px solid white;
@@ -81,6 +81,55 @@ div.exercise > div.title > div.hidden {
   font-size: 0;
 }
 
+div.exercise > div.input {
+    width: 75vw;
+  height: 15vh;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+div.exercise > div.input > input {
+  width: 50vw;
+  height: 80%;
+
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 4px;
+
+  transition-duration: 400ms;
+}
+
+div.exercise > div.input > button {
+  width: 15vw;
+  height: 80%;
+
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 4px;
+
+  transition-duration: 400ms;
+}
+
+div.exercise > div.input > button:hover {
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+div.exercise > div.title ruby rt {
+  opacity: 0;
+  transition-duration: 400ms;
+}
+
+div.exercise > div.title ruby:hover rt {
+  opacity: 1;
+}
+
 audio {
   width: 80%;
+}
+
+.green {
+  color: greenyellow;
 }
