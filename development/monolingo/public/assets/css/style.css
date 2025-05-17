@@ -33,7 +33,7 @@ div.buttons {
 }
 
 div.buttons > a {
-  background-color: green;
+  border: 1px solid white;
   padding: 0.8%;
   border-radius: 8px;
   text-decoration: none;

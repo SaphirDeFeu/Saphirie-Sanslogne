@@ -3,14 +3,14 @@ function CH_X(ex, choice) {
   const elem = document.getElementById(ex);
   const button = elem.querySelector("div.multiple").children.item(choice);
 
-  button.setAttribute("style", "background-color: red");
+  button.setAttribute("style", "border: 2px solid red");
 }
 
 function CH_V(ex, choice) {
   const elem = document.getElementById(ex);
   const button = elem.querySelector("div.multiple").children.item(choice);
 
-  button.setAttribute("style", "background-color: green");
+  button.setAttribute("style", "border: 2px solid green");
 
   elem.querySelector("div.explain").classList.remove(
     "hidden",
