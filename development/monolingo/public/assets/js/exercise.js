@@ -40,6 +40,13 @@ function CHECK(ex) {
   explain.classList.remove("hidden");
 }
 
+function ADD(ex, letter) {
+  const elem = document.getElementById(ex);
+  const button = elem.querySelector("div.characters").children.item(letter);
+  const input = elem.querySelector("input");
+  input.value += button.textContent;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   window.scrollTo({
     top: 0,
