@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronoms - Monolingo</title>
+
+  <link href="/assets/css/exercise.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="exercise" id="1">
+    <div class="title">
+      <div class="question">Combien de pronoms y a-t-il en tout?</div>
+      <div class="explain hidden green">Il y en a 8: les 6 pronoms animés dont 3 singuliers et 3 pluriels,<br />et les 2
+        pronoms inanimés dont un singulier et un pluriel.</div>
+    </div>
+    <div class="multiple">
+      <button onclick='CH_X("1", 0)'>6</button>
+      <button onclick='CH_V("1", 1)'>8</button>
+      <button onclick='CH_X("1", 2)'>12</button>
+      <button onclick='CH_X("1", 3)'>16</button>
+    </div>
+  </div>
+
+  <div class="exercise" id="2">
+    <div class="title">
+      <div class="question">Quels sont les 3 pronoms animés singuliers?</div>
+      <div class="explain hidden green">Une par personne: la première personne MĂ, deuxième personne TĂ et troisième
+        personne SĂ</div>
+    </div>
+    <div class="multiple">
+      <button onclick='CH_X("2", 0)'>ma, ta, sa</button>
+      <button onclick='CH_X("2", 1)'>măs, tăs, săs</button>
+      <button onclick='CH_X("2", 2)'>czä, tä, äl</button>
+      <button onclick='CH_V("2", 3)'>mă, tă, să</button>
+    </div>
+  </div>
+
+  <div class="exercise" id="3">
+    <div class="title">
+      <div class="question">Quels sont les pronoms inanimés?</div>
+      <div class="explain hidden green">Ils sont SI et SIS, au singulier et au pluriel respectivement.</div>
+    </div>
+    <div class="multiple">
+      <button onclick='CH_V("3", 0)'>si, sis</button>
+      <button onclick='CH_X("3", 1)'>sel, sels</button>
+      <button onclick='CH_X("3", 2)'>sel, sö</button>
+      <button onclick='CH_X("3", 3)'>si, siĕ</button>
+    </div>
+  </div>
+
+  <script defer src="/assets/js/exercise.js"></script>
+</body>
+
+</html>
