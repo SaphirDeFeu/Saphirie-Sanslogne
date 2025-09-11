@@ -1,8 +1,5 @@
 package io.github.saphirdefeu.minigamelolcow.webserver;
 
-import io.github.saphirdefeu.minigamelolcow.Logger;
-
-import java.util.Arrays;
 import java.util.Objects;
 
 public class WebserverAddon {
@@ -10,6 +7,8 @@ public class WebserverAddon {
     String url = null;
     String api_url = null;
     String raw_content_url = null;
+
+    Thread thread;
 
     public WebserverAddon(String url) {
         String[] items = url.split("/");
@@ -35,10 +34,12 @@ public class WebserverAddon {
 
         this.raw_content_url = String.join("/", items);
         RepoDownloader.downloadFiles(this.api_url, this.raw_content_url);
+
+        this.thread = new Thread(new ServerExecutor());
+        this.thread.start();
     }
 
     public void destroy() {
-
     }
 
 }

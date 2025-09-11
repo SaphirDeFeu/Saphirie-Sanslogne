@@ -1,7 +1,6 @@
 package io.github.saphirdefeu.minigamelolcow.webserver;
 
 import io.github.saphirdefeu.minigamelolcow.Logger;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -15,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RepoDownloader {
