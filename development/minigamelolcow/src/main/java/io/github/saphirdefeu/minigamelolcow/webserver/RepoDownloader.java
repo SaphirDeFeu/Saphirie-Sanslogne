@@ -1,6 +1,7 @@
 package io.github.saphirdefeu.minigamelolcow.webserver;
 
 import io.github.saphirdefeu.minigamelolcow.Logger;
+import org.python.apache.commons.io.FileUtils;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -20,7 +21,11 @@ public class RepoDownloader {
 
     public static void downloadFiles(String apiUrl, String rawContentUrl) {
         try {
+            // First, delete all the files in there and reinstall it
             Path localDir = Paths.get("plugins/minigamelolcow/webserver/");
+            FileUtils.deleteDirectory(localDir.toFile());
+
+            // Create it back
             Files.createDirectories(localDir);
 
             List<String> fileUrls = listFilesInDirectory(apiUrl, rawContentUrl);
