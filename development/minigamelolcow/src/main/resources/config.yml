@@ -13,3 +13,6 @@ addons:
     enabled: false
     token: ""
     webhook_url: ""
+  webserver:
+    enabled: false
+    repo: ""

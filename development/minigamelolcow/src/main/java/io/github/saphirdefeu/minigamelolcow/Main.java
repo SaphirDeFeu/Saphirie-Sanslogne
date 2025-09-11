@@ -6,6 +6,7 @@ import io.github.saphirdefeu.minigamelolcow.economy.Database;
 import io.github.saphirdefeu.minigamelolcow.economy.EconomyAddon;
 import io.github.saphirdefeu.minigamelolcow.nbtedit.NBTAddon;
 import io.github.saphirdefeu.minigamelolcow.phones.PhonesAddon;
+import io.github.saphirdefeu.minigamelolcow.webserver.WebserverAddon;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
@@ -31,6 +32,7 @@ public final class Main extends JavaPlugin {
     private NBTAddon nbtAddon;
     private PhonesAddon phonesAddon;
     private DiscordImplementation discord;
+    private WebserverAddon webserver;
 
     @Override
     public void onEnable() {
@@ -84,6 +86,12 @@ public final class Main extends JavaPlugin {
             }
         }
 
+        if(config.getBoolean("addons.webserver.enabled")) {
+            Logger.debug("Initializing Web Server");
+            String url = config.getString("addons.webserver.repo");
+            if(url != null) webserver = new WebserverAddon(url);
+        }
+
         if(config.getBoolean("addons.listeners.enabled")) {
             Logger.debug("Registering global events");
             PluginManager pluginManager = this.getServer().getPluginManager();
@@ -115,6 +123,7 @@ public final class Main extends JavaPlugin {
         Database.close();
         if(phonesAddon != null) phonesAddon.destroy();
         if(discord != null) discord.destroy();
+        if(webserver != null) webserver.destroy();
         Logger.debug("MLC disabled");
     }
 
