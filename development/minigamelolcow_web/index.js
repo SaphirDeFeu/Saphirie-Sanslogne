@@ -1,1 +1,4 @@
-console.log("hallo guys!")
+const PORT = process.argv[3];
+const HOST = process.argv[2];
+
+console.log(HOST + ":" + PORT);

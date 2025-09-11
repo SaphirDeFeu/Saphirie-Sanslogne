@@ -1,0 +1,21 @@
+{
+  "name": "minigamelolcow_web",
+  "version": "1.0.0",
+  "description": "Webserver for Minigamelolcow",
+  "homepage": "https://github.com/SaphirDeFeu/Saphirie-Sanslogne#readme",
+  "bugs": {
+    "url": "https://github.com/SaphirDeFeu/Saphirie-Sanslogne/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaphirDeFeu/Saphirie-Sanslogne.git"
+  },
+  "license": "ISC",
+  "author": "SaphirDeFeu, ~EM",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  }
+}
