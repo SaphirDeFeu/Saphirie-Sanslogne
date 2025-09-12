@@ -88,7 +88,7 @@ public final class Main extends JavaPlugin {
 
         if(config.getBoolean("addons.webserver.enabled")) {
             Logger.debug("Initializing Web Server");
-            String url = config.getString("addons.webserver.repo");
+            String url = config.getString("addons.webserver.root_ip");
             if(url != null) webserver = new WebserverAddon(url);
         }
 

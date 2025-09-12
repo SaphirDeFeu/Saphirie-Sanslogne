@@ -1,41 +1,40 @@
 package io.github.saphirdefeu.minigamelolcow.webserver;
 
-import java.util.Objects;
+import io.github.saphirdefeu.minigamelolcow.Logger;
+
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 
 public class WebserverAddon {
-
-    String url = null;
-    String api_url = null;
-    String raw_content_url = null;
-
     Thread thread;
 
     public WebserverAddon(String url) {
-        String[] items = url.split("/");
-        if(!Objects.equals(items[2], "github.com")) return;
+        this.thread = new Thread(() -> {
+            try {
+                URI _u = new URI(url + "/update");
+                URI _e = new URI(url + "/exec");
+                URL update = _u.toURL();
+                URL exec = _e.toURL();
 
-        this.url = url;
-        // Set API url
-        items[2] = "api.github.com";
-        // Make place for the /repos/ between domain & user
-        items[5] = items[4];
-        items[4] = items[3];
-        items[3] = "repos";
-        items[6] = "contents";
+                HttpURLConnection con = (HttpURLConnection) update.openConnection();
+                con.setRequestMethod("GET");
+                Logger.debug("dnpa: " + con.getResponseCode());
+                con.disconnect();
 
-        this.api_url = String.join("/", items);
+                // I'm too tired to make an actual fix on the webserver so making the plugin WAIT for the server to finish
+                // the /update call is the best I can do.
+                Thread.sleep(5000);
 
-        items = url.split("/");
-        items[2] = "raw.githubusercontent.com";
-        for(int i = 5; i < items.length - 1; i++) {
-            items[i] = items[i + 1];
-        }
-        items[items.length - 1] = "";
+                con = (HttpURLConnection) exec.openConnection();
+                con.setRequestMethod("GET");
+                Logger.debug("dnpa: " + con.getResponseCode());
+                con.disconnect();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-        this.raw_content_url = String.join("/", items);
-        RepoDownloader.downloadFiles(this.api_url, this.raw_content_url);
-
-        this.thread = new Thread(new ServerExecutor());
         this.thread.start();
     }
 
