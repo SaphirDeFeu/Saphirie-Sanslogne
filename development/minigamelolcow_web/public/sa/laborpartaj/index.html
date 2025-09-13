@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laborpartaj</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="icon"
+    href="https://raw.githubusercontent.com/SaphirDeFeu/Saphirie-Sanslogne/refs/heads/main/resourcepack/uncompressed/assets/custom/textures/item/labor.png">
+
+  <style>
+    .navbar {
+      z-index: 100;
+
+      position: fixed;
+      width: 100vw;
+      height: 15vh;
+      background-color: #820000;
+      color: white;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .navbar>div {
+      width: calc(100vw - 2 * 12vh);
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .navbar>div>a {
+      color: white;
+      text-decoration: none;
+      padding: 1%;
+      border-radius: 8px;
+    }
+
+    .navbar>img {
+      width: 12vh;
+    }
+
+    body>img {
+      width: 100vw;
+    }
+
+    .footer {
+      width: 100vw;
+      min-height: 30vh;
+      margin: 5vh 0;
+
+      background-color: #222;
+      color: white;
+      font-family: 'Times New Roman', Times, serif;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer>div {
+      width: 50vw;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content {
+      margin: 2vh 5vw;
+      width: 90vw;
+      min-height: 10vh;
+
+      display: flex;
+      flex-direction: column;
+
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .content>* {
+      display: flex;
+      flex-direction: row;
+      text-align: justify;
+      text-justify: inter-word;
+      align-items: center;
+    }
+
+    .content>.left {
+      margin: 2vh 5vw;
+      width: 45vw;
+      min-height: 10vh;
+
+      left: 5vw;
+
+      align-self: start;
+      justify-content: start;
+    }
+
+    .content>.right {
+      margin: 2vh 5vw;
+      width: 45vw;
+      min-height: 10vh;
+
+      right: 5vw;
+
+      align-self: end;
+      justify-content: end;
+    }
+
+    .content>.center {
+      margin: 2vh 5vw;
+      width: 45vw;
+      min-height: 10vh;
+
+      left: 22.5vw;
+
+      align-self: center;
+      justify-content: center;
+    }
+
+    .navbar>div>a:hover {
+      background-color: #710000;
+      transition-duration: 500ms;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <img
+      src="https://raw.githubusercontent.com/SaphirDeFeu/Saphirie-Sanslogne/refs/heads/main/resourcepack/uncompressed/assets/custom/textures/item/labor.png">
+    <div>
+      <a href="/sa/laborpartaj/">ACCUEIL</a>
+      <a href="/sa/laborpartaj/blog.html">BLOG</a>
+      <a href="/sa/laborpartaj/inscriptions.html">S'ENGAGER</a>
+      <a href="/sa/laborpartaj/info.html">À PROPOS</a>
+    </div>
+  </div>
+  <img src="/sa/laborpartaj/img/welcome-image.png">
+
+  <div class="content">
+    <div class="center">
+      <h1 style="font-size: 4em;">&gt; IM MĂS LABOR &lt;</h1>
+    </div>
+
+    <div class="left">
+      <div>
+        <h1>Nous sommes Labor.</h1>
+        <p>Le parti saphiriq des ouvriers - Nous avons décidé en ces temps d'ouvrir un site web sur
+          lequel vous pourrez retrouver tout notre programme, nos annonces, et nos prochaines manifestations.</p>
+      </div>
+    </div>
+
+    <div class="right">
+      <div>
+        <h1>Nos actualités</h1>
+        <p>Pour vous tenir informé des actualités du parti et de la vie politique saphiriq, rendez vous sur <a
+            href="/sa/laborpartaj/blog.html">notre blog</a> où nous essayons de poster <strong>a minima</strong> chaque
+          semaine. On accepte tous vos retours dans les commentaires de nos blogs - vous pouvez vous inscrire auprès du
+          parti sur une des pages que nous sommes en train de préparer.</p>
+      </div>
+    </div>
+
+    <div class="left">
+      <div>
+        <h1>S'engager</h1>
+        <p>Sur la page <a href="/sa/laborpartaj/inscriptions.html">d'inscription</a>, vous aurez accès aux formulaires
+          d'engagement au sein de Labor.</p>
+        <p>Sachez-le, cet engagement ne signifie pas que vous participerez aux débats parlementaires en tant que député
+          élu. Toutefois, cet engagement signifie que vous recevrez des informations supplémentaires sur les
+          manifestations ou engagements de notre parti.</p>
+      </div>
+    </div>
+
+    <div class="center">
+      <div>
+        <h1 style="font-size: 3em;">SEUL, ON SUPPLIE</h1>
+        <h1 style="font-size: 3em;">ENSEMBLE, ON NÉGOCIE</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <span>Laborpartaj, organisation politique saphiriq</span>
+      <span style="height: 1em;"></span>
+      <span>Nous contacter: contact@laborpartaj.sa</span>
+    </div>
+    <div>
+      <span>&copy; 5 Laborpartaj. Tous droits réservés.</span>
+    </div>
+</body>
+
+</html>
