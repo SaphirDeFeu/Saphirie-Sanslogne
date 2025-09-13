@@ -1,0 +1,19 @@
+h1 {
+  text-align: center;
+  left: 5vw;
+  width: 90vw;
+  border-bottom: 2px solid black;
+}
+
+.path {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.path_item {
+  margin: 1%;
+  padding: .1em .5em;
+  border: 1px solid grey;
+  border-radius: 8px;
+}
