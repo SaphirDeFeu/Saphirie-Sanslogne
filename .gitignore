@@ -33,3 +33,5 @@ development/*/run
 
 development/*/node_modules
 development/*/.vscode
+
+development/--ignore--*
