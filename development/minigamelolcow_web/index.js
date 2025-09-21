@@ -15,6 +15,9 @@ if (require.main === module) {
 }
 
 async function main() {
+  const _p = path.join(__dirname, "../--ignore--web");
+  if (!fs.existsSync(_p)) fs.mkdirSync(_p);
+
   // Check the amount of js files with prefix svr: in ./server
   calculateApprovalNecessity(path.join(__dirname, "server"));
 
