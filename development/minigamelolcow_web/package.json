@@ -16,7 +16,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js localhost 31252"
+    "dev": "node index.js localhost 31252",
+    "count": "node count.js"
   },
   "dependencies": {
     "express": "^5.1.0"
