@@ -25,23 +25,41 @@ function write(domain, data) {
 }
 
 /**
- * Reads JSON data from --ignore-web/[domain]
+ * Checks the existence of a file named --ignore-web/[domain]
  * @param {string} domain a single file name (no slashes) that represents the website domain
  *
- * @return {string} function exit value
+ * @return {boolean} function exit value
  */
-function read(domain) {
+function exists(domain) {
   if (typeof domain !== typeof "") return "domain is not string";
 
   if (illegal_regex.test(domain)) return "invalid domain name";
 
+  // We know the parent folder exists because it's been created during setup
+  const path = join(__dirname, "../--ignore--web", domain);
+
+  return fs.existsSync(path);
+}
+
+/**
+ * Reads JSON data from --ignore-web/[domain]
+ * @param {string} domain a single file name (no slashes) that represents the website domain
+ *
+ * @return {[string, number]} function exit value or object (return[1] is 0 when function returns an object, and 1 when it returns an exit value)
+ */
+function read(domain) {
+  if (typeof domain !== typeof "") return ["domain is not string", 1];
+
+  if (illegal_regex.test(domain)) return ["invalid domain name", 1];
+
   const path = join(__dirname, "../--ignore--web", domain);
 
   const _d = fs.readFileSync(path, "utf-8");
-  return JSON.parse(_d);
+  return [_d, 0];
 }
 
 module.exports = {
   write,
   read,
+  exists,
 };

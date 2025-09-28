@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laborpartaj</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/sa/laborpartaj.css">
+  <link rel="icon"
+    href="https://raw.githubusercontent.com/SaphirDeFeu/Saphirie-Sanslogne/refs/heads/main/resourcepack/uncompressed/assets/custom/textures/item/labor.png">
+
+  <style>
+    .content {
+      padding-top: 15vh;
+    }
+
+    .content {
+      width: 100vw;
+      height: 85vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content>.box {
+      width: 50vw;
+      height: 50vh;
+      border: 1px solid black;
+      border-radius: 8px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content>.box>.line {
+      width: 50vw;
+      height: 100%;
+      margin: 1vw 1vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content>.box>.line>input {
+      width: 100%;
+      height: 100%;
+      margin: 1vw 1vh;
+      border: 1px solid black;
+      border-radius: 8px;
+
+      text-align: center;
+    }
+
+    .content>.box button {
+      padding: 1vh 1vh;
+      border: 4px solid #820000;
+      border-radius: 8px;
+      transition-duration: 400ms;
+    }
+
+    .content>.box button:hover {
+      background-color: #82000044;
+    }
+
+    dialog.confirmation {
+      width: 60vw;
+      min-height: 20vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .confirmation>* {
+      margin: 1vh 0;
+    }
+
+    .confirmation button.confirm {
+      padding: 1vh 1vh;
+      border: 4px solid #008200;
+      border-radius: 8px;
+      transition-duration: 400ms;
+    }
+
+    .confirmation button.confirm:hover {
+      background-color: #00820044;
+    }
+
+    .confirmation button.no {
+      padding: 1vh 1vh;
+      border: 4px solid #820000;
+      border-radius: 8px;
+      transition-duration: 400ms;
+    }
+
+    .confirmation button.no:hover {
+      background-color: #82000044;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <img
+      src="https://raw.githubusercontent.com/SaphirDeFeu/Saphirie-Sanslogne/refs/heads/main/resourcepack/uncompressed/assets/custom/textures/item/labor.png">
+    <div>
+      <a href="/sa/laborpartaj/">ACCUEIL</a>
+      <a href="/sa/laborpartaj/blog.html">BLOG</a>
+      <a href="/sa/laborpartaj/inscriptions.html">S'ENGAGER</a>
+      <a href="/sa/laborpartaj/info.html">À PROPOS</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="box">
+      <div class="line">
+        <input class="name" id="lastname" placeholder="Nom de famille..." />
+        <input class="name" id="firstname" placeholder="Prénom..." />
+      </div>
+
+      <div class="line">
+        <input class="address" id="street" placeholder="Numéro & rue..." />
+        <input class="address" id="city" placeholder="Ville & état/région..." />
+        <input class="address" id="country" placeholder="Pays..." />
+      </div>
+
+      <div class="line">
+        <button onclick="register()">S'engager!</button>
+      </div>
+
+      <div class="line">
+        <span id="success"></span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <dialog class="confirmation">
+    <span>Les informations suivantes sont-elles correctes?</span>
+    <span id="data"></span>
+    <button onclick="confirmRegister()" class="confirm">Je confirme que les informations présentées soient
+      correctes.</button>
+    <button onclick="document.querySelector('dialog').close()" class="no">Attendez!</button>
+  </dialog>
+
+  <script defer>
+    function register() {
+      // Get data
+      const lastname = document.querySelector('input#lastname').value;
+      const firstname = document.querySelector('input#firstname').value;
+      const street = document.querySelector('input#street').value;
+      const city = document.querySelector('input#city').value;
+      const country = document.querySelector('input#country').value;
+
+      // Set modal data
+      document.querySelector('span#data').textContent = `${lastname} ${firstname}, à ${street}, ${city}, ${country}`;
+
+      /**
+       * @type {HTMLDialogElement}
+       */
+      const dialog = document.querySelector('dialog');
+      dialog.showModal();
+    }
+
+    function confirmRegister() {
+      // Get data
+      const lastname = document.querySelector('input#lastname').value;
+      const firstname = document.querySelector('input#firstname').value;
+      const street = document.querySelector('input#street').value;
+      const city = document.querySelector('input#city').value;
+      const country = document.querySelector('input#country').value;
+
+      // Send data over to server
+      fetch("/sa/laborpartaj/register", {
+        method: 'POST',
+        body: JSON.stringify({
+          lastname, firstname, street, city, country
+        }),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
+      }).then(async (response) => {
+        const dialog = document.querySelector('dialog');
+        dialog.close();
+        document.querySelector('span#success').textContent = await response.text();
+      })
+
+      // var xmlHttp = new XMLHttpRequest();
+      // xmlHttp.onreadystatechange = () => {
+      //   const response = xmlHttp.responseText;
+      //   console.log(response);
+
+      //   if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      //     /**
+      //      * @type {HTMLDialogElement}
+      //      */
+      //     const dialog = document.querySelector('dialog');
+      //     dialog.close();
+
+      //     document.querySelector('span#success').textContent = 'Votre adhésion aux listes engagées a bien été prise en compte!';
+      //   }
+      // }
+      // xmlHttp.open("POST", "/sa/laborpartaj/register", true);
+      // xmlHttp.send();
+
+      document.querySelector('span#data').textContent = `Chargement...`;
+    }
+  </script>
+</body>
+
+</html>

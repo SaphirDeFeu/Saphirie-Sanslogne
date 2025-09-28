@@ -113,8 +113,8 @@
     <div class="center">
       <div class="row-item">
         <h3>Nombre d'engagés</h3>
-        <span>0</span>
-        <span class="normal">dont 0 sanslogniens</span>
+        <span id="total_adherents">?</span>
+        <span class="normal">dont <span id="sanslognien_adherents">?</span> sanslogniens</span>
       </div>
       <div class="row-item">
         <h3>Places à l'Assemblée nationale</h3>
@@ -181,6 +181,16 @@
       <span>&copy; 5 Laborpartaj. Tous droits réservés.</span>
     </div>
   </div>
+
+  <script>
+    fetch('/sa/laborpartaj/adherents', {
+      method: 'GET',
+    }).then(async (response) => {
+      const data = await response.json();
+      document.querySelector('span#total_adherents').textContent = data[0];
+      document.querySelector('span#sanslognien_adherents').textContent = data[1];
+    })
+  </script>
 </body>
 
 </html>

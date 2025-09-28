@@ -22,6 +22,8 @@ async function main() {
   calculateApprovalNecessity(path.join(__dirname, "server"));
 
   app.use(express.static("public"));
+  app.use(express.json());
+  app.use(express.text());
   app.use((req, res, next) => {
     const time = new Date(Date.now()).toLocaleString("fr");
     const ip = req.socket.remoteAddress || req.headers["x-forwarded-for"];
