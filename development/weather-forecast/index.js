@@ -1,16 +1,16 @@
 // Parameters
 // They must follow the following format:
 // NUMBER = [ TIME, MODE ]
-const CURR = [1500, 0];
-const __N1 = [1800, 0];
-const __N2 = [2100, 0];
-const __N3 = [2400, 0];
-const __N4 = [2700, 0];
-const __N5 = [3000, 0];
+const CURR = [6732, 1];
+const __N1 = [5768, 0];
+const __N2 = [2971, 0];
+const __N3 = [2091, 0];
+const __N4 = [2270, 0];
+const __N5 = [5733, 2];
 
-const current_day = 1745;
+const current_day = 1750;
 // Current time must follow the format [hour, minutes, seconds]
-const current_time = 17393;
+const current_time = 16523;
 
 function update_time(obj, timing) {
   let __t1 = obj.end.time + timing;
@@ -89,8 +89,22 @@ let __O5 = {
 };
 __O5 = update_time(__O5, __N4[0]);
 
+let __O6 = {
+  start: {
+    date: __O5.end.date,
+    time: __O5.end.time,
+  },
+  end: {
+    date: __O5.end.date,
+    time: __O5.end.time,
+  },
+  mode: __N5[1],
+};
+__O6 = update_time(__O6, __N5[0]);
+
 console.log(__O1);
 console.log(__O2);
 console.log(__O3);
 console.log(__O4);
 console.log(__O5);
+console.log(__O6);
