@@ -24,6 +24,7 @@ public class PhoneReceive implements Listener {
         if(!event.hasItem()) return;
 
         ItemStack item = event.getItem();
+        if(item == null) return;
         PersistentDataContainer mm = item.getItemMeta().getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey("mlc-pl", "phoneowner");
 
