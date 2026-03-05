@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laborpartaj</title>
+  <title>'Raoburh'Paorhti</title>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/sa/laborpartaj.css">
+  <link rel="stylesheet" href="/css/sa/raoburhpaorhti.css">
   <link rel="icon"
     href="https://raw.githubusercontent.com/SaphirDeFeu/Saphirie-Sanslogne/refs/heads/main/resourcepack/uncompressed/assets/custom/textures/item/labor.png">
 
@@ -110,18 +110,19 @@
     <img
       src="https://raw.githubusercontent.com/SaphirDeFeu/Saphirie-Sanslogne/refs/heads/main/resourcepack/uncompressed/assets/custom/textures/item/labor.png">
     <div>
-      <a href="/sa/laborpartaj/">ACCUEIL</a>
-      <a href="/sa/laborpartaj/blog.html">BLOG</a>
-      <a href="/sa/laborpartaj/inscriptions.html">S'ENGAGER</a>
-      <a href="/sa/laborpartaj/info.html">À PROPOS</a>
+      <a href="/sa/raoburhpaorhti/">ACCUEIL</a>
+      <a href="/sa/raoburhpaorhti/blog.html">BLOG</a>
+      <a href="/sa/raoburhpaorhti/inscriptions.html">S'ENGAGER</a>
+      <a href="/sa/raoburhpaorhti/info.html">À PROPOS</a>
     </div>
   </div>
 
   <div class="content">
     <div class="box">
       <div class="line">
-        <input class="name" id="lastname" placeholder="Nom de famille..." />
-        <input class="name" id="firstname" placeholder="Prénom..." />
+        <input class="address" id="lastname" placeholder="Nom de famille..." />
+        <input class="address" id="marriagename" placeholder="Nom d'alliance..."/>
+        <input class="address" id="firstname" placeholder="Prénom..." />
       </div>
 
       <div class="line">
@@ -154,13 +155,14 @@
     function register() {
       // Get data
       const lastname = document.querySelector('input#lastname').value;
+      const marriagename = document.querySelector('input#marriagename').value;
       const firstname = document.querySelector('input#firstname').value;
       const street = document.querySelector('input#street').value;
       const city = document.querySelector('input#city').value;
       const country = document.querySelector('input#country').value;
 
       // Set modal data
-      document.querySelector('span#data').textContent = `${lastname} ${firstname}, à ${street}, ${city}, ${country}`;
+      document.querySelector('span#data').textContent = `${firstname} ${marriagename} ${lastname}, à ${street}, ${city}, ${country}`;
 
       /**
        * @type {HTMLDialogElement}
@@ -172,16 +174,17 @@
     function confirmRegister() {
       // Get data
       const lastname = document.querySelector('input#lastname').value;
+      const marriagename = document.querySelector('input#marriagename').value;
       const firstname = document.querySelector('input#firstname').value;
       const street = document.querySelector('input#street').value;
       const city = document.querySelector('input#city').value;
       const country = document.querySelector('input#country').value;
 
       // Send data over to server
-      fetch("/sa/laborpartaj/register", {
+      fetch("/sa/raoburhpaorhti/register", {
         method: 'POST',
         body: JSON.stringify({
-          lastname, firstname, street, city, country
+          lastname, marriagename, firstname, street, city, country
         }),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -207,7 +210,7 @@
       //     document.querySelector('span#success').textContent = 'Votre adhésion aux listes engagées a bien été prise en compte!';
       //   }
       // }
-      // xmlHttp.open("POST", "/sa/laborpartaj/register", true);
+      // xmlHttp.open("POST", "/sa/raoburhpaorhti/register", true);
       // xmlHttp.send();
 
       document.querySelector('span#data').textContent = `Chargement...`;

@@ -1,7 +1,7 @@
 const { write, read, exists } = require("../../../data");
 const { setRoute, declareFinished } = require("../../../index");
 
-const DOMAIN = "laborpartaj.sa";
+const DOMAIN = "raoburhpaorhti.sa";
 
 let LaborpartajData = {
   /**
@@ -14,7 +14,7 @@ if (!exists(DOMAIN)) {
   write(DOMAIN, LaborpartajData);
 }
 
-setRoute("post", "/sa/laborpartaj/register", async (req, res) => {
+setRoute("post", "/sa/raoburhpaorhti/register", async (req, res) => {
   const body = await req.body;
 
   const file = read(DOMAIN);
@@ -37,7 +37,7 @@ setRoute("post", "/sa/laborpartaj/register", async (req, res) => {
   }
 });
 
-setRoute("get", "/sa/laborpartaj/adherents", async (req, res) => {
+setRoute("get", "/sa/raoburhpaorhti/adherents", async (req, res) => {
   const file = read(DOMAIN);
   if (file[1] == 1) return;
 
