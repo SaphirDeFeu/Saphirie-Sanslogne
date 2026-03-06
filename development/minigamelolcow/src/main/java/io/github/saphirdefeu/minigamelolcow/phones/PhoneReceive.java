@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.PluginManager;
@@ -25,7 +26,9 @@ public class PhoneReceive implements Listener {
 
         ItemStack item = event.getItem();
         if(item == null) return;
-        PersistentDataContainer mm = item.getItemMeta().getPersistentDataContainer();
+        ItemMeta im = item.getItemMeta();
+        if(im == null) return;
+        PersistentDataContainer mm = im.getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey("mlc-pl", "phoneowner");
 
         if(!mm.has(key)) return;
