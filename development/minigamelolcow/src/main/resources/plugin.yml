@@ -1,7 +1,7 @@
 name: minigamelolcow
-version: '1.21.4'
+version: '1.21.8'
 main: io.github.saphirdefeu.minigamelolcow.Main
-api-version: '1.21.4'
+api-version: '1.21.8'
 prefix: "MLC-PL"
 load: STARTUP
 author: SaphirDeFeu
