@@ -28,7 +28,8 @@ public class MessageReceived extends ListenerAdapter {
                 "finance",
                 "lgbt",
                 "saphirie",
-                "sanslogne"
+                "sanslogne",
+                "newyear"
         };
 
         HashMap<String, String[]> messages = new HashMap<>();
@@ -36,17 +37,20 @@ public class MessageReceived extends ListenerAdapter {
                 "Union fédérative de Saphirie-Sanslogne N°1 !!!!!!!! <:union:1268165799328223283> <:union:1268165799328223283>",
                 "Vérifies blogpopulaire.sa y a totalement un nouveau poste",
                 "# FROM THE SCREEN :tv: TO THE RING :boxing_glove: TO THE PEN :pen: TO THE KING :crown: WASSSSHHHHHHIIIIINNGGGGGGG :crossed_swords:",
-                "Comme KSI* le dit:\n> BUT IM COOOLLLDLDDDDDDLDLDLDL :cold_face: :cold_face:"
+                "Comme KSI* le dit:\n> BUT IM COOOLLLDLDDDDDDLDLDLDL :cold_face: :cold_face:",
+                "RELEASE THE BLOCKSTEIN FILES"
         });
         messages.put(types[0], new String[]{
                 "Je suis actuellement en train d'étudier comment je pourrais augmenter mon rendement",
                 "Fuck you je te donne pas ma thune",
-                "Calcul des comptes du pays en cours......................\n<:sanslogne:1268165829011439679> Sanslogne: +2%\n<:saphirie:1268165815782608946> Saphirie: -500000%"
+                "Calcul des comptes du pays en cours......................\n<:sanslogne:1268165829011439679> Sanslogne: +2%\n<:saphirie:1268165815782608946> Saphirie: -500000%",
+                "PIB saphirico-sanslognien: entre 15M et 30M ; PIB de Tuvalu: 65M"
         });
         messages.put(types[1], new String[]{
                 "Si vous avez des questions à propos du fait d'être gay, demandez à <@548922318852849671>",
                 "Il faut comprendre, je ne suis pas homosexuel. Je suis un pays. Je suis un bot. Je ne suis pas un humain.",
-                "Safŏr Dẽfẽ maintenant que le SAM est au pouvoir : :rainbow_flag::x:"
+                "safxjurdofxo si le PHNG passe au pouvoir : :rainbow_flag::x:",
+                "Les saphiriqs, c'est quoi? C'EST TOUS DES GAYS FRRRRRRRRR"
         });
         messages.put(types[2], new String[]{
                 "Imagine habiter en Saphirie (common saphiriq W)",
@@ -54,7 +58,7 @@ public class MessageReceived extends ListenerAdapter {
                 "Pov la saphirie quand ils se rendent compte qu'ils peuvent juste pomper de la thune dans l'industrie : :fire: :fire:",
                 "Je propose qu'on refait la frontière : donnez B-131 aux Sanslogniens et donnez Colonz aux saphiriqs",
                 "J'ai juré j'ai jamais vu un jour en saphirie sans qu'il y ait de la propagande électorale",
-                "Les gars on a pas fait Lone pour qu'on se retrouve À NOUVEAU avec des tyrans au pouvoir!"
+                "Les gars on a pas fait llune pour qu'on se retrouve À NOUVEAU avec des tyrans au pouvoir!"
         });
         messages.put(types[3], new String[]{
                 "Imagine habiter en Sanslogne (common sanslogne W)",
@@ -64,12 +68,17 @@ public class MessageReceived extends ListenerAdapter {
                 "Les théocrates ont déjà théoriquement gagnés... (opinion polémique ici)",
                 "Venez on va à la plage d'Athena ce soir!... Attends... t'as pas oublié la protection anti-théocrates?"
         });
+        messages.put(types[4], new String[]{
+                "BONNE ANNÉE LA TEAM!! VIVE LA SAPHIRIE-SANSLOGNE",
+                "Union fédérative de Saphirie-Sanslogne N°1 !!!!!!!! <:union:1268165799328223283> <:union:1268165799328223283>"
+        });
 
         int[] counts = {
                 countOccurrences(raw, "thune", "finance", "argent", "monnaie", "money", "$", "€", "£", "₽"),
                 countOccurrences(raw, "lgbt", "gay", "lesbienne", "bisexuel", "trans", "sexualité", "aro", "ace", "asexuel"),
-                countOccurrences(raw, "saphirie", "saphiriq", "saforga", "safŏrga", "safiorga"),
-                countOccurrences(raw, "sanslogne", "sanslognien", "athena")
+                countOccurrences(raw, "saphirie", "saphiriq", "safiorga", "safxjurga"),
+                countOccurrences(raw, "sanslogne", "sanslognien", "athena"),
+                countOccurrences(raw, "année", "nouvelle", "bonne", "annee")
         };
         // END ALGORITHM SELECTION MODEL
 
