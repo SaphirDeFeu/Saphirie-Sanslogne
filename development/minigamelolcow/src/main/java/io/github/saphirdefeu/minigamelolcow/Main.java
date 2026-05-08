@@ -166,6 +166,7 @@ public final class Main extends JavaPlugin {
         Objective obj = scoreboard.getObjective("Timesave");
 
         int days = obj.getScore("dayOfMonth").getScore();
+        int weekday = obj.getScore("weekday").getScore();
         int month = obj.getScore("month").getScore() - 1;
         int year = obj.getScore("year").getScore();
 
@@ -184,10 +185,30 @@ public final class Main extends JavaPlugin {
                 "Décembre",
         };
 
-        return new String[]{ Integer.toString(days), months[month], Integer.toString(year) };
+        String[] weekdays = {
+                "Lundi",
+                "Mardi",
+                "Mercredi",
+                "Jeudi",
+                "Vendredi",
+                "Samedi",
+                "Dimanche"
+        };
+
+        double[] time = getCurrentTime();
+        double hour = time[0];
+
+        if(hour < 6) {
+            weekday += 1;
+            weekday %= 7;
+        }
+
+        String weekday_string = weekdays[weekday];
+
+        return new String[]{ Integer.toString(days), months[month], Integer.toString(year), weekday_string };
     }
 
-    public static String getCurrentTime() {
+    public static double[] getCurrentTime() {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getMainScoreboard();
         Objective obj = scoreboard.getObjective("Timesave");
@@ -203,6 +224,27 @@ public final class Main extends JavaPlugin {
 
         float seconds = (minutes_with_sec % 1.0f) * 60.0f;
 
-        return String.format("%d:%d:%.3f", hour, (int) minutes_with_sec, seconds);
+        return new double[]{ (double) hour, (double) minutes_with_sec, (double) seconds };
+    }
+
+    public static String formatTime(double[] time) {
+        return String.format("%d:%d:%.3f", (int) time[0], (int) time[1], time[2]);
+    }
+
+    public static String formatSaphiriqTime(double[] time) {
+        int hour = (int) time[0];
+        hour -= 6;
+        if(hour < 0) {
+            hour += 24;
+        }
+
+        char half = 'K';
+        if(hour > 12) {
+            half = 'T';
+        }
+
+        hour -= 12;
+
+        return String.format("%c%d:%d:%.3f", half, hour, (int) time[1], time[2]);
     }
 }

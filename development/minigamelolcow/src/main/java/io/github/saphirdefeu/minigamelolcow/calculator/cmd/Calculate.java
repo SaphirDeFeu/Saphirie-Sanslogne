@@ -44,7 +44,8 @@ public class Calculate implements BasicCommand {
         String str;
 
         if(doTime) {
-            str = Main.getCurrentTime();
+            double[] time = Main.getCurrentTime();
+            str = Main.formatTime(time);
         } else {
             int days = obj.getScore("day").getScore() + 1;
             if(obj.getScore("daytime").getScore() > 18000) {

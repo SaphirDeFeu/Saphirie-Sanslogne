@@ -170,9 +170,12 @@ public class SlashCommandReceived extends ListenerAdapter {
 
         Bukkit.getScheduler().runTask(plugin, () -> {
             String[] date = Main.getCurrentDate();
-            String time = Main.getCurrentTime();
+            double[] time = Main.getCurrentTime();
 
-            String msg = String.format("Il est **%s** le **%s %s %s**", time, date[0], date[1], date[2]);
+            String formatTime = Main.formatTime(time);
+            String formatTimeSaphiriq = Main.formatSaphiriqTime(time);
+
+            String msg = String.format("Il est **%s** le **%s, %s %s %s** (safxjurganafx: %s)", formatTime, date[3], date[0], date[1], date[2], formatTimeSaphiriq);
 
             event.getHook().sendMessage(msg).queue();
         });
