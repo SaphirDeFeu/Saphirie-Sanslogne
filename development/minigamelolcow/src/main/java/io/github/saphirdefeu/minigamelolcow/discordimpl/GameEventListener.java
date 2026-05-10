@@ -10,7 +10,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class GameEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        WebhookClient discord = DiscordImplementation.getWebhookClient();
         Player player = event.getPlayer();
         String s = ":arrow_right: ";
         switch(player.getName()) {
@@ -24,12 +23,11 @@ public class GameEventListener implements Listener {
                 s += String.format("**%s** a rejoint", player.getName());
                 break;
         }
-        discord.send(s);
+        DiscordImplementation.Webhook.send(s);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        WebhookClient discord = DiscordImplementation.getWebhookClient();
         Player player = event.getPlayer();
         String s = ":arrow_left: ";
         switch(player.getName()) {
@@ -43,6 +41,6 @@ public class GameEventListener implements Listener {
                 s += String.format("**%s** a quitté", player.getName());
                 break;
         }
-        discord.send(s);
+        DiscordImplementation.Webhook.send(s);
     }
 }

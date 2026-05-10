@@ -18,9 +18,8 @@ public class BroadcastTime implements BasicCommand {
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
-        WebhookClient client = DiscordImplementation.getWebhookClient();
         String[] date = Main.getCurrentDate();
         String msg = String.format("Nous sommes le **%s %s %s**", date[0], date[1], date[2]);
-        client.send(msg);
+        DiscordImplementation.Webhook.send(msg);
     }
 }

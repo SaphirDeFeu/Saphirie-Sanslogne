@@ -1,6 +1,7 @@
 package io.github.saphirdefeu.minigamelolcow.discordimpl;
 
 import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.receive.ReadonlyMessage;
 import io.github.saphirdefeu.minigamelolcow.Logger;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.cmd.ReasonStop;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.eventlisteners.MessageReceived;
@@ -14,10 +15,13 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.CompletableFuture;
 
 public final class DiscordImplementation {
     private static String token;
@@ -88,11 +92,21 @@ public final class DiscordImplementation {
         }
     }
 
-    public static WebhookClient getWebhookClient() {
-        return webhookClient;
-    }
-
     public static JDA getJda() {
         return jda;
+    }
+
+    public abstract class Webhook {
+        public static WebhookClient getClient() { return webhookClient; }
+
+        public static CompletableFuture<ReadonlyMessage> send(@NotNull String content) {
+            return webhookClient.send(content).handle((res, t) -> {
+                if(res != null) return res;
+
+                Bukkit.getServer().sendRichMessage("[ERROR] Accessing Discord Webhook Client! Check console for details");
+                Logger.err(t.getMessage());
+                return null;
+            });
+        }
     }
 }

@@ -19,8 +19,6 @@ public class ReasonStop implements BasicCommand {
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
-        WebhookClient client = DiscordImplementation.getWebhookClient();
-        String[] date = Main.getCurrentDate();
         String type = args[0].toUpperCase();
         StringBuilder all_args = new StringBuilder();
         for(int i = 1; i < args.length; i++) {
@@ -30,6 +28,6 @@ public class ReasonStop implements BasicCommand {
         }
 
         String msg = String.format(":grey_question: Message de type **%s** pour cause: %s", type, all_args);
-        client.send(msg);
+        DiscordImplementation.Webhook.send(msg);
     }
 }
