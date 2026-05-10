@@ -47,6 +47,11 @@ commands:
     usage: /calculate <time|date>
     permission: mlc.calculator.calculate
     permission-message: "You do not have permission to run this command"
+  weather:
+    description: Provides a weather forecast
+    usage: /weather
+    premission: mlc.calculator.weather
+    permission-message: "You do not have permission to run this command"
   phone:
     description: Summons a Pineapple phone into your inventory
     usage: /phone [identifier]
@@ -90,8 +95,12 @@ permissions:
     default: op
     children:
       mlc.calculator.calculate: true
+      mlc.calculator.weather: true
   mlc.calculator.calculate:
     description: "Allows the use of /calculate"
+    default: not op
+  mlc.calculator.weather:
+    description: "Allows the use of /weather"
     default: not op
   mlc.phones.admin:
     description: "Administrator permission for phones addon of minigamelolcow"

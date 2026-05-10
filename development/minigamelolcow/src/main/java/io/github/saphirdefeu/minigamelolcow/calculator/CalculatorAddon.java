@@ -34,6 +34,7 @@ public class CalculatorAddon {
 
             // ! Commandes
             commands.register(Calculate.name, Calculate.description, Calculate.aliases, new Calculate());
+            commands.register(Weather.name, Weather.description, Weather.aliases, new Weather());
             // !
         });
     }
