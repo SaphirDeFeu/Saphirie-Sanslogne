@@ -18,6 +18,8 @@ public class DepositListener implements Listener {
         if(item == null) return;
 
         ItemMeta mm = item.getItemMeta();
+        if(mm == null) return;
+        
         NamespacedKey key = new NamespacedKey("mlc-pl", "amount");
         if(mm.getPersistentDataContainer().has(key))
             Bukkit.dispatchCommand(event.getPlayer(), "deposit");
