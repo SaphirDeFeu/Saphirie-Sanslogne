@@ -1,5 +1,6 @@
 package io.github.saphirdefeu.minigamelolcow.calculator.cmd;
 
+import io.github.saphirdefeu.minigamelolcow.Logger;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Bukkit;
@@ -13,9 +14,9 @@ import java.util.List;
 
 public class Weather implements BasicCommand {
 
-    public static final String name = "weather";
+    public static final String name = "weathercast";
     public static final Collection<String> aliases = List.of();
-    public static final String description = "Usage: /weather";
+    public static final String description = "Usage: /weathercast";
 
 
     @Override
@@ -39,9 +40,13 @@ public class Weather implements BasicCommand {
             times[i] = obj.getScore(String.format("time%d", i)).getScore();
         }
 
+        for(int i = 0; i < 6; i++) {
+            Logger.debug(String.format("%d: %d, %d", i, modes[i], times[i]));
+        }
+
         // Agglutinate similar modes
         int lastMode = -1;
-        int lastIndex = 0;
+        int lastIndex = -1;
         for(int i = 0; i < 6; i++) {
             if(modes[i] != lastMode) {
                 lastIndex++;
@@ -52,8 +57,12 @@ public class Weather implements BasicCommand {
             finalTimes[lastIndex] += times[i];
         }
 
+        for(int i = 0; i < 6; i++) {
+            Logger.debug(String.format("%d: %d, %d", i, finalModes[i], finalTimes[i]));
+        }
+
         // Display
-        String[] correspondance = {"Ensoleillé", "Pluvieux", "Orageux"};
+        String[] correspondance = {"<yellow>Ensoleillé</yellow>", "<blue>Pluvieux</blue>", "<red>Orageux</red>"};
 
         String[] str = {
                 "<rainbow>[MLC-PL]</rainbow> <yellow>Prévisions météorologiques</yellow>",
@@ -73,15 +82,11 @@ public class Weather implements BasicCommand {
             String mode = correspondance[finalModes[i]];
             int ticks = finalTimes[i];
 
-            float tick_hour = ((float)ticks) / 1000.0f;
-            int hour = (6 + ((int)tick_hour)) % 24;
-
+            int hour = ticks / 1000;
             int tick_minute = ticks % 1000;
-            float minutes_with_sec = ((float) tick_minute) / (16.0f + 2.0f / 3.0f);
+            float minutes_with_sec = ((float) tick_minute) / 1000f * 60f;
 
-            float seconds = (minutes_with_sec % 1.0f) * 60.0f;
-
-            str[i + 1] = String.format("\\> <yellow>%s</yellow> pendant <yellow>%d:%d:%.3f</yellow>", mode, hour, (int) minutes_with_sec, seconds);
+            str[i + 1] = String.format("- %s pendant <yellow>%d heures, %d minutes</yellow>", mode, hour, (int) minutes_with_sec);
         }
 
         for(int i = 0; i < 7; i++) {
