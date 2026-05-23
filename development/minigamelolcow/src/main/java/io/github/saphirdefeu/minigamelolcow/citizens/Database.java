@@ -106,7 +106,7 @@ public abstract class Database {
         for(int i = 0; i < 7; i++) {
             int random = (int)(Math.random() * 9) + 1; // 1 to 9
             mul *= random;
-            sum *= random;
+            sum += random;
             id.append(random);
         }
 
@@ -272,7 +272,7 @@ public abstract class Database {
         if(data.cidmid != null) { sql.append("cidmid = ?, "); parameters[lastIndex] = data.cidmid; lastIndex++; }
         if(data.skinmid != null) { sql.append("firstname = ?, "); parameters[lastIndex] = data.skinmid; lastIndex++; }
 
-        sql.append(String.format("id = %s WHERE id = %s", id, id));
+        sql.append("id = ? WHERE id = ?");
 
         try(PreparedStatement statement = connection.prepareStatement(sql.toString())) {
             for(int i = 0; i < parameters.length; i++) {
