@@ -14,10 +14,20 @@ public class WebserverAddon {
             try {
                 URI _u = new URI(url + "/update");
                 URI _e = new URI(url + "/exec");
+                URI _c = new URI(url + "/cut");
+                URL cut = _c.toURL();
                 URL update = _u.toURL();
                 URL exec = _e.toURL();
 
-                HttpURLConnection con = (HttpURLConnection) update.openConnection();
+                HttpURLConnection con = (HttpURLConnection) cut.openConnection();
+                con.setRequestMethod("GET");
+                Logger.debug("dnpa: " + con.getResponseCode());
+                con.disconnect();
+
+                // just check the comment 8 lines below
+                Thread.sleep(5000);
+
+                con = (HttpURLConnection) update.openConnection();
                 con.setRequestMethod("GET");
                 Logger.debug("dnpa: " + con.getResponseCode());
                 con.disconnect();
