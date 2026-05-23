@@ -28,12 +28,14 @@ public final class DiscordImplementation {
     private static String webhookUrl;
     private static Thread thread;
 
+    private static boolean dev;
     private static JDA jda;
     private static WebhookClient webhookClient;
 
-    public DiscordImplementation(@NotNull String _token, @NotNull String url, @NotNull JavaPlugin plugin) {
+    public DiscordImplementation(@NotNull String _token, @NotNull String url, @NotNull JavaPlugin plugin, boolean _dev) {
         token = _token;
         webhookUrl = url;
+        dev = _dev;
 
         thread = new Thread(() -> {
             jda = JDABuilder.createDefault(token)
@@ -66,7 +68,8 @@ public final class DiscordImplementation {
         if(webhookUrl.isEmpty()) return;
 
         webhookClient = WebhookClient.withUrl(webhookUrl);
-        webhookClient.send(":green_circle: Le serveur s'allume");
+        if(!dev) webhookClient.send(":green_circle: Le serveur s'allume");
+        else webhookClient.send(":green_circle::construction: Le serveur de développement s'allume");
 
         PluginManager pluginManager = plugin.getServer().getPluginManager();
         pluginManager.registerEvents(new GameEventListener(), plugin);
@@ -81,7 +84,9 @@ public final class DiscordImplementation {
     }
 
     public void destroy() {
-        webhookClient.send(":red_circle: Le serveur s'éteint");
+        if(!dev) webhookClient.send(":red_circle: Le serveur s'éteint");
+        else webhookClient.send(":red_circle::construction: Le serveur de développement s'éteint");
+
         jda.shutdown();
         if(webhookClient != null) webhookClient.close();
 

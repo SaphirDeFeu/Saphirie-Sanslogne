@@ -85,12 +85,13 @@ public final class Main extends JavaPlugin {
         }
 
         if(config.getBoolean("addons.discord.enabled")) {
+            boolean dev = config.getBoolean("addons.discord.dev");
             Logger.debug("Initializing Discord Implementation");
             try {
                 Class.forName("net.dv8tion.jda.api.JDA");
                 String token = config.getString("addons.discord.token");
                 String url = config.getString("addons.discord.webhook_url");
-                if(token != null && url != null) discord = new DiscordImplementation(token, url, this);
+                if(token != null && url != null) discord = new DiscordImplementation(token, url, this, dev);
             } catch (ClassNotFoundException e) {
                 Logger.err("Cannot initialize Discord implementation: missing dependency 'net.dv8tion.jda.api.JDA'");
             }
