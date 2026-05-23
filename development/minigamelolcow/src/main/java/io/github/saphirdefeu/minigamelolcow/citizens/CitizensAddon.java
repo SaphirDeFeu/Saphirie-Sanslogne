@@ -6,12 +6,9 @@ import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Add-on ECONOMY du plugin, classe principale qui gère l'entièreté de la section économique
@@ -48,6 +45,7 @@ public final class CitizensAddon {
             commands.register(UpdateCitizen.name, UpdateCitizen.description, UpdateCitizen.aliases, new UpdateCitizen());
             commands.register(AddCitizen.name, AddCitizen.description, AddCitizen.aliases, new AddCitizen());
             commands.register(Count.name, Count.description, Count.aliases, new Count());
+            commands.register(FetchFromID.name, FetchFromID.description, FetchFromID.aliases, new FetchFromID());
             // !
         });
     }
