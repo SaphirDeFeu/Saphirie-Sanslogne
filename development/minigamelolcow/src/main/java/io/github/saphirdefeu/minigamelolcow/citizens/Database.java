@@ -214,7 +214,7 @@ public abstract class Database {
      * @throws RuntimeException si java.sql ne peut pas exécuter la requête
      */
     public static CitizenSearchQuery getDataFromId(String id) {
-        String sql = "SELECT balance FROM accounts WHERE id = ?;";
+        String sql = "SELECT * FROM citizens WHERE id = ?;";
         CitizenSearchQuery data = new CitizenSearchQuery();
         data.id = id;
 

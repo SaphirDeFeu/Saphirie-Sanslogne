@@ -46,6 +46,7 @@ public final class CitizensAddon {
             commands.register(AddCitizen.name, AddCitizen.description, AddCitizen.aliases, new AddCitizen());
             commands.register(Count.name, Count.description, Count.aliases, new Count());
             commands.register(FetchFromID.name, FetchFromID.description, FetchFromID.aliases, new FetchFromID());
+            commands.register(FindFromQuery.name, FindFromQuery.description, FindFromQuery.aliases, new FindFromQuery());
             // !
         });
     }
