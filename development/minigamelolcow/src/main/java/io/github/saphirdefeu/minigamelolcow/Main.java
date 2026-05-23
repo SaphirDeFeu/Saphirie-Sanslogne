@@ -1,6 +1,7 @@
 package io.github.saphirdefeu.minigamelolcow;
 
 import io.github.saphirdefeu.minigamelolcow.calculator.CalculatorAddon;
+import io.github.saphirdefeu.minigamelolcow.citizens.CitizensAddon;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.DiscordImplementation;
 import io.github.saphirdefeu.minigamelolcow.economy.Database;
 import io.github.saphirdefeu.minigamelolcow.economy.EconomyAddon;
@@ -28,6 +29,7 @@ public final class Main extends JavaPlugin {
     public static final String PREFIX = "[MLC-PL] ";
     private static File pluginDataFolder;
     private EconomyAddon econModule;
+    private CitizensAddon citizensAddon;
     private CalculatorAddon calcAddon;
     private NBTAddon nbtAddon;
     private PhonesAddon phonesAddon;
@@ -50,6 +52,15 @@ public final class Main extends JavaPlugin {
                 econModule = new EconomyAddon(this);
             } catch(SQLException e) {
                 Logger.err("Something went wrong while initializing ECONOMY addon!");
+            }
+        }
+
+        if(config.getBoolean("addons.citizens.enabled")) {
+            Logger.debug("Initializing CITIZENS addon");
+            try {
+                citizensAddon = new CitizensAddon(this);
+            } catch(SQLException e) {
+                Logger.err("Something went wrong while initializing CITIZENS addon!");
             }
         }
 

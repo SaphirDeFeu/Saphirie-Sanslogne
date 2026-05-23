@@ -9,6 +9,9 @@ addons:
     enabled: false # Experimental feature, enable at your own risk
   listeners:
     enabled: true
+  citizens:
+    enabled: false
+    discordlink: false
   discord:
     enabled: false
     token: ""
