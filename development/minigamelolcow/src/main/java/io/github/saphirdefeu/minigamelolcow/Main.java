@@ -3,7 +3,6 @@ package io.github.saphirdefeu.minigamelolcow;
 import io.github.saphirdefeu.minigamelolcow.calculator.CalculatorAddon;
 import io.github.saphirdefeu.minigamelolcow.citizens.CitizensAddon;
 import io.github.saphirdefeu.minigamelolcow.discordimpl.DiscordImplementation;
-import io.github.saphirdefeu.minigamelolcow.economy.Database;
 import io.github.saphirdefeu.minigamelolcow.economy.EconomyAddon;
 import io.github.saphirdefeu.minigamelolcow.nbtedit.NBTAddon;
 import io.github.saphirdefeu.minigamelolcow.phones.PhonesAddon;
@@ -131,7 +130,8 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         Logger.debug("Disabling MLC");
-        Database.close();
+        io.github.saphirdefeu.minigamelolcow.economy.Database.close();
+        io.github.saphirdefeu.minigamelolcow.citizens.Database.close();
         if(phonesAddon != null) phonesAddon.destroy();
         if(discord != null) discord.destroy();
         if(webserver != null) webserver.destroy();
