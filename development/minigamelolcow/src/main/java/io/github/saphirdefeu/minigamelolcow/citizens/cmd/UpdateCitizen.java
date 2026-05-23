@@ -19,7 +19,7 @@ public class UpdateCitizen implements BasicCommand {
         Database.CitizenSearchQuery data = new Database.CitizenSearchQuery();
 
         if(args[0].equals("help")) {
-            stack.getExecutor().sendRichMessage("<rainbow>[MLC-PL]</rainbow> Utilisation de <yellow>/updatecitizen</yellow>:\n" +
+            stack.getSender().sendRichMessage("<rainbow>[MLC-PL]</rainbow> Utilisation de <yellow>/updatecitizen</yellow>:\n" +
                     "/updatecitizen <red>[id] [*firstname] [*lastname] [*birthplace] [*birthdate] [*state] [*gender] [*height] [*job] [*livingplace] [*notes] [*cidmid] [*skinmid]</red>\n" +
                     "- <red>*</red>: champ facultatif (remplacer par * si vous ne voulez pas le modifier)\n" +
                     "- <red>cidmid</red>: Lien discord du message contenant l'image de la carte d'identité du citoyen\n" +
@@ -29,19 +29,19 @@ public class UpdateCitizen implements BasicCommand {
         }
 
         if(args[0].equals("*")) {
-            stack.getExecutor().sendRichMessage("<red>Le premier argument doit être une ID citoyenne! Utilisez <bold>/updatecitizen help</bold> pour plus de détails</red>");
+            stack.getSender().sendRichMessage("<red>Le premier argument doit être une ID citoyenne! Utilisez <bold>/updatecitizen help</bold> pour plus de détails</red>");
             return;
         }
 
         if(args.length < 13) {
-            stack.getExecutor().sendRichMessage("<red>Il me faut au moins 13 arguments. Utilisez <bold>/updatecitizen help</bold> pour plus d'aide.");
+            stack.getSender().sendRichMessage("<red>Il me faut au moins 13 arguments. Utilisez <bold>/updatecitizen help</bold> pour plus d'aide.");
             return;
         }
 
         data.id = args[0];
 
         if(!Database.isValidID(data.id)) {
-            stack.getExecutor().sendRichMessage("<red>Cet identifiant n'est pas valide! Êtes-vous sûr de l'avoir correctement copié?</red>");
+            stack.getSender().sendRichMessage("<red>Cet identifiant n'est pas valide! Êtes-vous sûr de l'avoir correctement copié?</red>");
             return;
         }
 
@@ -61,9 +61,9 @@ public class UpdateCitizen implements BasicCommand {
         int v = Database.setDataFromId(data.id, data);
 
         if(v == 0) {
-            stack.getExecutor().sendRichMessage("<rainbow>[MLC-PL]</rainbow> Base de données citoyenne mise à jour!");
+            stack.getSender().sendRichMessage("<rainbow>[MLC-PL]</rainbow> Base de données citoyenne mise à jour!");
         }  else {
-            stack.getExecutor().sendRichMessage("<red>An error has occurred.</red>");
+            stack.getSender().sendRichMessage("<red>An error has occurred.</red>");
         }
     }
 

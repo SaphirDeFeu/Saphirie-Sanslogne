@@ -17,7 +17,7 @@ public class Count implements BasicCommand {
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
         int count = Database.getCount();
-        stack.getExecutor().sendRichMessage(String.format("<rainbow>[MLC-PL]</rainbow> <yellow>%d</yellow> citoyens inscrits", count));
+        stack.getSender().sendRichMessage(String.format("<rainbow>[MLC-PL]</rainbow> <yellow>%d</yellow> citoyens inscrits", count));
     }
 
 }

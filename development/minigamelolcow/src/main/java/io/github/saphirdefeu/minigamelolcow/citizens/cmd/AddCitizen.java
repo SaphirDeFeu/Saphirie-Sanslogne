@@ -18,9 +18,9 @@ public class AddCitizen implements BasicCommand {
     public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
         String id = Database.addEntry();
         if(id.equals("0")) {
-            stack.getExecutor().sendRichMessage("<red>An error has occurred</red>");
+            stack.getSender().sendRichMessage("<red>An error has occurred</red>");
         } else {
-            stack.getExecutor().sendRichMessage(String.format("<rainbow>[MLC-PL]</rainbow>: Nouveau citoyen créé avec l'identifiant <yellow>%s</yellow>", id));
+            stack.getSender().sendRichMessage(String.format("<rainbow>[MLC-PL]</rainbow>: Nouveau citoyen créé avec l'identifiant <yellow>%s</yellow>", id));
         }
     }
 
