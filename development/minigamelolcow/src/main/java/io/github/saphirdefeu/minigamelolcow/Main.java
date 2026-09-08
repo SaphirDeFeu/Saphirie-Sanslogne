@@ -172,6 +172,10 @@ public final class Main extends JavaPlugin {
         return PlainTextComponentSerializer.plainText().serialize(component);
     }
 
+    /**
+     * Returns the current date according to the format specified below
+     * @return [day of month, month, year, weekday name]
+     */
     public static String[] getCurrentDate() {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getMainScoreboard();
@@ -220,6 +224,10 @@ public final class Main extends JavaPlugin {
         return new String[]{ Integer.toString(days), months[month], Integer.toString(year), weekday_string };
     }
 
+    /**
+     * Returns the current time in the format specified below
+     * @return [hours, minutes, seconds]
+     */
     public static double[] getCurrentTime() {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getMainScoreboard();
